@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>art-at-coco | グラフィックデザイン ポートフォリオ</title>
+  <style>
+    :root {
+      --primary: #2c2c2c;
+      --accent: #c8945a;
+      --light: #f7f4f0;
+      --white: #ffffff;
+      --gray: #888;
+      --border: #e8e0d6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: var(--light);
+      color: var(--primary);
+      line-height: 1.7;
+    }
+
+    /* ヘッダー */
+    header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 60px 40px 50px;
+      text-align: center;
+    }
+    header .logo {
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    header .tagline {
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: #bbb;
+    }
+
+    /* ナビ */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      padding: 4px 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    nav a:hover { border-color: var(--accent); }
+
+    /* セクション共通 */
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-size: 1.6rem;
+      font-weight: 500;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* About */
+    #about {
+      background: var(--white);
+      max-width: 100%;
+      padding: 0;
+    }
+    #about .inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    #about .about-text p {
+      color: #555;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .service-tag {
+      background: var(--light);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+
+    /* Works グリッド */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 28px;
+    }
+    .work-card {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .work-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+    .work-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: var(--light);
+    }
+    .work-thumb-pdf {
+      width: 100%;
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0ebe4, #e8ddd2);
+      color: var(--gray);
+    }
+    .work-thumb-pdf svg {
+      width: 48px;
+      height: 48px;
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+    .work-thumb-pdf span {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+    .work-info {
+      padding: 18px 20px;
+    }
+    .work-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .work-category {
+      font-size: 0.78rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* カテゴリフィルター */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+    .filter-btn {
+      padding: 7px 20px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--white);
+      cursor: pointer;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* コンタクト */
+    #contact {
+      background: var(--primary);
+      color: var(--white);
+      max-width: 100%;
+      padding: 0;
+    }
+    #contact .inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 24px;
+      text-align: center;
+    }
+    #contact .section-title { color: var(--accent); }
+    #contact .section-subtitle { color: var(--white); border-color: #444; }
+    #contact p { color: #aaa; font-size: 0.9rem; margin-bottom: 8px; }
+
+    /* フッター */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: var(--gray);
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 640px) {
+      header .logo { font-size: 1.8rem; }
+      #about .inner { grid-template-columns: 1fr; gap: 32px; }
+      nav { gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">art-at-coco</div>
+  <div class="tagline">グラフィックデザイン &nbsp;|&nbsp; 印刷物制作</div>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#works">Works</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- About -->
+<div id="about">
+  <div class="inner">
+    <div class="about-text">
+      <div class="section-title">About</div>
+      <div class="section-subtitle">デザインで、想いを形に。</div>
+      <p>チラシ・ショップカード・ロゴ・ラベル・メニューなど、地域の事業者さまの印刷物制作をお手伝いしています。</p>
+      <p>「こんなものが作りたい」というご要望から、印刷入稿データまで丁寧に対応します。</p>
+      <div class="services">
+        <span class="service-tag">チラシ・フライヤー</span>
+        <span class="service-tag">ショップカード</span>
+        <span class="service-tag">ロゴデザイン</span>
+        <span class="service-tag">ラベル</span>
+        <span class="service-tag">パンフレット</span>
+        <span class="service-tag">POP</span>
+        <span class="service-tag">メニュー表</span>
+        <span class="service-tag">プレゼントカード</span>
+      </div>
+    </div>
+    <div class="about-image">
+      <!-- プロフィール写真があれば差し替えてください -->
+      <div style="width:100%;aspect-ratio:1;background:linear-gradient(135deg,#e8ddd2,#c8945a22);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#c8945a;font-size:1rem;letter-spacing:0.2em;">art-at-coco</div>
+    </div>
+  </div>
+</div>
+
+<!-- Works -->
+<section id="works">
+  <div class="section-title">Works</div>
+  <div class="section-subtitle">制作実績</div>
+
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterWorks('all', this)">All</button>
+    <button class="filter-btn" onclick="filterWorks('flyer', this)">チラシ</button>
+    <button class="filter-btn" onclick="filterWorks('card', this)">カード・ショップカード</button>
+    <button class="filter-btn" onclick="filterWorks('label', this)">ラベル</button>
+    <button class="filter-btn" onclick="filterWorks('menu', this)">メニュー・POP</button>
+    <button class="filter-btn" onclick="filterWorks('pamphlet', this)">パンフレット</button>
+  </div>
+
+  <div class="works-grid" id="works-grid">
+
+    <a class="work-card" data-cat="flyer" href="実績/202306_repair_チラシ_ol.png" target="_blank">
+      <img class="work-thumb" src="実績/202306_repair_チラシ_ol.png" alt="修繕サービス チラシ" loading="lazy">
+      <div class="work-info">
+        <div class="work-title">修繕サービス チラシ</div>
+        <div class="work-category">チラシ・フライヤー</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="flyer" href="実績/202402_新地_産後ケア_チラシR2.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">産後ケアサービス チラシ</div>
+        <div class="work-category">チラシ・フライヤー</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="flyer" href="実績/チラシ案_re03.png" target="_blank">
+      <img class="work-thumb" src="実績/チラシ案_re03.png" alt="チラシデザイン案" loading="lazy">
+      <div class="work-info">
+        <div class="work-title">チラシデザイン</div>
+        <div class="work-category">チラシ・フライヤー</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="card" href="実績/KNOT.様_logo.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">KNOT. ロゴデザイン</div>
+        <div class="work-category">ロゴ</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="card" href="実績/KNOT.様_ショップカード03.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">KNOT. ショップカード</div>
+        <div class="work-category">ショップカード</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="card" href="実績/Terrace j_プレゼントカード.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">Terrace j プレゼントカード</div>
+        <div class="work-category">カード</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="pamphlet" href="実績/Jインソール_表面.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">J インソール パンフレット（表面）</div>
+        <div class="work-category">パンフレット</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="pamphlet" href="実績/Jインソール_中面_新.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">J インソール パンフレット（中面）</div>
+        <div class="work-category">パンフレット</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="pamphlet" href="実績/あしなか_中面02.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">あしなか パンフレット</div>
+        <div class="work-category">パンフレット</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="menu" href="実績/メニューA_0418.jpg" target="_blank">
+      <img class="work-thumb" src="実績/メニューA_0418.jpg" alt="メニュー" loading="lazy">
+      <div class="work-info">
+        <div class="work-title">メニュー表</div>
+        <div class="work-category">メニュー</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="menu" href="実績/POP_多肉植物.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">多肉植物 POP</div>
+        <div class="work-category">POP</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="label" href="実績/ラベル_メダカの卵.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">メダカの卵 ラベル</div>
+        <div class="work-category">ラベル</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="label" href="実績/ラベル_メダカの産卵床.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">メダカの産卵床 ラベル</div>
+        <div class="work-category">ラベル</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="label" href="実績/ラベル_食用ひまわり.pdf" target="_blank">
+      <div class="work-thumb-pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        <span>PDF</span>
+      </div>
+      <div class="work-info">
+        <div class="work-title">食用ひまわり ラベル</div>
+        <div class="work-category">ラベル</div>
+      </div>
+    </a>
+
+    <a class="work-card" data-cat="flyer" href="実績/依頼01_納品.jpg" target="_blank">
+      <img class="work-thumb" src="実績/依頼01_納品.jpg" alt="納品デザイン" loading="lazy">
+      <div class="work-info">
+        <div class="work-title">デザイン納品作品</div>
+        <div class="work-category">チラシ・フライヤー</div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<div id="contact">
+  <div class="inner">
+    <div class="section-title">Contact</div>
+    <div class="section-subtitle">お問い合わせ</div>
+    <p>チラシ・ショップカード・ロゴなどのご依頼、お気軽にご連絡ください。</p>
+    <p style="margin-top:24px; color:#ccc; font-size:1rem; letter-spacing:0.1em;">
+      <!-- メールアドレスや連絡先を記載してください -->
+      ✉ your-email@example.com
+    </p>
+  </div>
+</div>
+
+<footer>
+  &copy; 2024 art-at-coco. All rights reserved.
+</footer>
+
+<script>
+  function filterWorks(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.work-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

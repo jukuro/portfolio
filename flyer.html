@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>art-at-coco チラシ</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    :root {
+      --primary: #2c2c2c;
+      --accent: #c8945a;
+      --light: #f7f4f0;
+      --white: #ffffff;
+      --border: #e8e0d6;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #ccc;
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      padding: 32px;
+    }
+
+    /* 印刷時のみの設定 */
+    @media print {
+      body { background: none; padding: 0; gap: 0; }
+      .print-hint { display: none; }
+    }
+
+    /* ページ共通 */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    /* ─── 表面 ─── */
+    .page-front {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* 上部カラーブロック */
+    .front-top {
+      background: var(--primary);
+      color: var(--white);
+      padding: 44px 40px 36px;
+      position: relative;
+    }
+    .front-top::after {
+      content: '';
+      position: absolute;
+      bottom: -24px;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: var(--primary);
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+    }
+    .front-logo {
+      font-size: 2.6rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .front-tagline {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: #bbb;
+    }
+
+    /* メインコピー */
+    .front-copy {
+      padding: 52px 40px 28px;
+      flex: 1;
+    }
+    .front-copy h2 {
+      font-size: 1.7rem;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      color: var(--primary);
+    }
+    .front-copy h2 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+    .front-copy p {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.85;
+      max-width: 100mm;
+    }
+
+    /* サービス一覧 */
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 0 40px 28px;
+    }
+    .service-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--primary);
+    }
+    .service-item::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* QRコードゾーン */
+    .front-qr-zone {
+      background: var(--light);
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .front-qr-zone canvas {
+      border: 4px solid var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 4px;
+    }
+    .qr-text h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--primary);
+    }
+    .qr-text p {
+      font-size: 0.78rem;
+      color: #666;
+      line-height: 1.7;
+    }
+    .qr-url {
+      font-size: 0.72rem;
+      color: var(--accent);
+      margin-top: 8px;
+      word-break: break-all;
+    }
+
+    /* フッター */
+    .front-footer {
+      background: var(--primary);
+      padding: 14px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .front-footer span {
+      color: #888;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+    }
+    .front-footer .accent { color: var(--accent); }
+
+    /* ─── 裏面 ─── */
+    .page-back {
+      display: flex;
+      flex-direction: column;
+    }
+    .back-header {
+      background: var(--accent);
+      color: var(--white);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-header .logo {
+      font-size: 1.4rem;
+      letter-spacing: 0.25em;
+      font-weight: 300;
+    }
+    .back-header .subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      opacity: 0.85;
+    }
+
+    /* 実績紹介 */
+    .back-works {
+      padding: 32px 40px 20px;
+    }
+    .back-section-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .back-section-heading {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .works-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .work-item {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--light);
+    }
+    .work-item-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+    .work-item-pdf {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #ede6dd, #ddd0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #999;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+    .work-item-label {
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      color: #555;
+      font-weight: 500;
+    }
+    .work-item-cat {
+      padding: 0 10px 8px;
+      font-size: 0.66rem;
+      color: var(--accent);
+    }
+
+    /* 料金・進め方 */
+    .back-flow {
+      margin: 0 40px 20px;
+      padding: 20px;
+      background: var(--light);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .flow-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+      color: var(--primary);
+    }
+    .flow-steps {
+      display: flex;
+      gap: 0;
+      font-size: 0.75rem;
+    }
+    .flow-step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '›';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    .flow-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      margin: 0 auto 6px;
+    }
+    .flow-label {
+      color: var(--primary);
+      line-height: 1.4;
+    }
+
+    /* コンタクト */
+    .back-contact {
+      margin: 0 40px;
+      padding: 16px 20px;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-contact .label {
+      font-size: 0.75rem;
+      color: #888;
+      margin-bottom: 4px;
+    }
+    .back-contact .value {
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .back-footer {
+      margin-top: auto;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    .back-footer span {
+      font-size: 0.72rem;
+      color: #aaa;
+    }
+
+    /* 印刷ボタン（画面表示時のみ） */
+    .print-hint {
+      background: var(--primary);
+      color: var(--white);
+      padding: 16px 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 0.88rem;
+    }
+    .print-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 10px 28px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: inherit;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .print-btn:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+<div class="print-hint">
+  <div>
+    <strong>印刷・PDF保存の手順：</strong><br>
+    ブラウザの印刷（Ctrl+P）→ 用紙サイズ A4 / 余白 なし / 背景グラフィックを印刷 にチェック
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨 印刷 / PDF保存</button>
+</div>
+
+<!-- 表面 -->
+<div class="page page-front">
+  <div class="front-top">
+    <div class="front-logo">art-at-coco</div>
+    <div class="front-tagline">グラフィックデザイン &nbsp;|&nbsp; 印刷物制作</div>
+  </div>
+
+  <div class="front-copy">
+    <h2>「こんなものが作りたい」を<br><em>デザイン</em>で形にします。</h2>
+    <p>
+      チラシ・ショップカード・ロゴ・ラベル・メニュー表など、地域の事業者さまの印刷物制作をお手伝いします。<br>
+      ご要望をヒアリングして、印刷入稿データまで丁寧に対応。
+    </p>
+  </div>
+
+  <div class="service-grid">
+    <div class="service-item">チラシ・フライヤー</div>
+    <div class="service-item">ショップカード・名刺</div>
+    <div class="service-item">ロゴデザイン</div>
+    <div class="service-item">ラベルデザイン</div>
+    <div class="service-item">パンフレット・冊子</div>
+    <div class="service-item">POP・メニュー表</div>
+    <div class="service-item">プレゼントカード</div>
+    <div class="service-item">その他ご相談ください</div>
+  </div>
+
+  <div class="front-qr-zone">
+    <canvas id="qr-front"></canvas>
+    <div class="qr-text">
+      <h3>制作実績はこちら</h3>
+      <p>QRコードを読み取ると<br>ポートフォリオサイトをご覧いただけます。</p>
+      <div class="qr-url" id="qr-url-display"></div>
+    </div>
+  </div>
+
+  <div class="front-footer">
+    <span class="accent">art-at-coco</span>
+    <span>グラフィックデザイン</span>
+  </div>
+</div>
+
+<!-- 裏面 -->
+<div class="page page-back">
+  <div class="back-header">
+    <div class="logo">art-at-coco</div>
+    <div class="subtitle">制作実績 Portfolio</div>
+  </div>
+
+  <div class="back-works">
+    <div class="back-section-title">Works</div>
+    <div class="back-section-heading">制作実績</div>
+
+    <div class="works-list">
+      <!-- 画像ファイル（直接表示） -->
+      <div class="work-item">
+        <img class="work-item-img" src="実績/202306_repair_チラシ_ol.png" alt="修繕チラシ">
+        <div class="work-item-label">修繕サービス チラシ</div>
+        <div class="work-item-cat">チラシ</div>
+      </div>
+      <div class="work-item">
+        <img class="work-item-img" src="実績/チラシ案_re03.png" alt="チラシ">
+        <div class="work-item-label">チラシデザイン</div>
+        <div class="work-item-cat">チラシ</div>
+      </div>
+      <div class="work-item">
+        <img class="work-item-img" src="実績/メニューA_0418.jpg" alt="メニュー">
+        <div class="work-item-label">メニュー表</div>
+        <div class="work-item-cat">メニュー</div>
+      </div>
+      <div class="work-item">
+        <div class="work-item-pdf">KNOT.</div>
+        <div class="work-item-label">KNOT. ショップカード</div>
+        <div class="work-item-cat">ショップカード</div>
+      </div>
+      <div class="work-item">
+        <div class="work-item-pdf">J Insole</div>
+        <div class="work-item-label">インソール パンフレット</div>
+        <div class="work-item-cat">パンフレット</div>
+      </div>
+      <div class="work-item">
+        <div class="work-item-pdf">Label</div>
+        <div class="work-item-label">ラベルデザイン 各種</div>
+        <div class="work-item-cat">ラベル</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="back-flow">
+    <div class="flow-title">制作の流れ</div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-num">1</div>
+        <div class="flow-label">お問い合わせ<br>ヒアリング</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">2</div>
+        <div class="flow-label">ラフ案<br>ご提案</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">3</div>
+        <div class="flow-label">デザイン<br>修正</div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-num">4</div>
+        <div class="flow-label">入稿データ<br>納品</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height:16px;"></div>
+
+  <div class="back-contact">
+    <div>
+      <div class="label">お問い合わせ</div>
+      <!-- ご自身の連絡先に変更してください -->
+      <div class="value">✉ your-email@example.com</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="label">ポートフォリオ</div>
+      <div class="value" id="contact-url" style="font-size:0.82rem;color:#c8945a;"></div>
+    </div>
+  </div>
+
+  <div class="back-footer">
+    <span>art-at-coco</span>
+    <span>&copy; 2024 art-at-coco</span>
+  </div>
+</div>
+
+<script>
+  // ★ ここにポートフォリオのURLを設定してください
+  // GitHub Pagesなら例: 'https://jukuro.github.io/portfolio/'
+  const PORTFOLIO_URL = 'https://jukuro.github.io/portfolio/';
+
+  // QRコードを生成
+  QRCode.toCanvas(document.getElementById('qr-front'), PORTFOLIO_URL, {
+    width: 110,
+    margin: 1,
+    color: { dark: '#2c2c2c', light: '#ffffff' }
+  });
+
+  // URL表示
+  document.getElementById('qr-url-display').textContent = PORTFOLIO_URL;
+  document.getElementById('contact-url').textContent = PORTFOLIO_URL;
+</script>
+
+</body>
+</html>
