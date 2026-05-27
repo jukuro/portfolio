@@ -175,9 +175,9 @@
 
     /* ════════════ 裏面 合計297mm ════════════
        ヘッダー   20mm
-       実績グリッド 128mm
+       実績グリッド 148mm
        制作の流れ   40mm
-       コンタクト   95mm
+       コンタクト   75mm
        フッター    14mm
        合計       297mm
     ═══════════════════════════════════════ */
@@ -192,7 +192,7 @@
     .b-header .subtitle { font-size: 0.7rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.8); }
 
     .b-works {
-      height: 128mm;
+      height: 148mm;
       padding: 10px 34px 0;
       flex-shrink: 0; display: flex; flex-direction: column;
     }
@@ -236,18 +236,19 @@
     .flow-label { font-size: 0.57rem; color: var(--primary); line-height: 1.45; }
 
     .b-contact {
-      height: 95mm;
+      height: 75mm;
       margin: 0 34px;
       border: 2px solid var(--primary); border-radius: 8px;
-      padding: 14px 20px 14px;
-      display: flex; flex-direction: column; gap: 10px;
+      padding: 12px 20px;
+      display: flex; flex-direction: column; justify-content: space-between;
       flex-shrink: 0;
     }
     .b-ct-head  { flex-shrink: 0; }
-    .b-ct-title { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin: 2px 0 3px; }
-    .b-ct-sub   { font-size: 0.63rem; color: #777; }
+    .b-ct-title { font-size: 0.93rem; font-weight: 700; color: var(--primary); margin: 2px 0 2px; }
+    .b-ct-sub   { font-size: 0.62rem; color: #777; }
     .b-ct-rule  { height: 1px; background: var(--border); flex-shrink: 0; }
-    .b-ct-body  { flex: 1; min-height: 0; display: flex; align-items: center; gap: 18px; }
+    .b-ct-body  { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
+    .b-ct-note  { font-size: 0.57rem; color: #bbb; text-align: center; flex-shrink: 0; }
 
     .b-qr-pair  { display: flex; gap: 18px; flex-shrink: 0; align-items: center; }
     .b-qr-block { display: flex; flex-direction: column; align-items: center; gap: 6px; }
@@ -397,13 +398,13 @@
     <div class="b-ct-body">
       <div class="b-qr-pair">
         <div class="b-qr-block">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
-               width="110" height="110" alt="QR ポートフォリオ">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
+               width="100" height="100" alt="QR ポートフォリオ">
           <div class="b-qr-lbl">実績サイト</div>
         </div>
         <div class="b-qr-block">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://forms.gle/TR6pvQFX1u1kKq4c8&color=c8945a"
-               width="110" height="110" alt="QR フォーム">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://forms.gle/TR6pvQFX1u1kKq4c8&color=c8945a"
+               width="100" height="100" alt="QR フォーム">
           <div class="b-qr-lbl">依頼フォーム</div>
         </div>
       </div>
@@ -423,6 +424,7 @@
         </div>
       </div>
     </div>
+    <div class="b-ct-note">QRコードを読み取るか、メール・フォームからお気軽にどうぞ ／ お見積もり無料</div>
   </div>
   <div class="b-footer">
     <span>お見積もり無料 ／ まずはお気軽にご相談ください</span>
