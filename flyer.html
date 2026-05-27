@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>art-at-coco チラシ</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <style>
     :root {
       --primary: #2c2c2c;
@@ -15,31 +14,31 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #999;
+      background: #888;
       font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 32px;
-      padding: 40px 32px;
+      padding: 32px;
     }
-
     @media print {
       body { background: none; padding: 0; gap: 0; }
       .print-hint { display: none; }
       @page { size: A4; margin: 0; }
     }
 
+    /* 印刷ヒント */
     .print-hint {
+      width: 210mm;
       background: var(--primary);
       color: var(--white);
-      padding: 14px 28px;
+      padding: 12px 24px;
       border-radius: 8px;
       display: flex;
       align-items: center;
       gap: 16px;
-      width: 210mm;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
     }
     .print-hint strong { color: var(--accent); }
     .print-btn {
@@ -47,342 +46,284 @@
       background: var(--accent);
       color: var(--white);
       border: none;
-      padding: 9px 22px;
-      border-radius: 6px;
-      font-size: 0.83rem;
+      padding: 8px 20px;
+      border-radius: 5px;
+      font-size: 0.82rem;
       cursor: pointer;
       font-family: inherit;
       white-space: nowrap;
     }
 
-    /* ─── ページ共通 ─── */
+    /* ─── A4ページ共通 ─── */
     .page {
       width: 210mm;
       height: 297mm;
       background: var(--white);
-      position: relative;
       overflow: hidden;
       page-break-after: always;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* ══════════════════════════════
-       表面  (flex column でなく 絶対位置で管理)
-    ══════════════════════════════ */
+    /* ══════════════════════════════════
+       表面  各セクションに height% を指定
+    ══════════════════════════════════ */
 
-    /* ヘッダー */
+    /* ① ヘッダー 9% */
     .f-header {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 90px;
+      height: 9%;
       background: var(--primary);
-      padding: 22px 40px;
+      padding: 0 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-shrink: 0;
     }
-    .f-logo {
-      font-size: 2.4rem;
-      font-weight: 200;
-      letter-spacing: 0.4em;
-      color: var(--accent);
-      line-height: 1;
-    }
-    .f-tagline {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      color: #999;
-      margin-top: 4px;
-    }
+    .f-logo    { font-size: 2.3rem; font-weight: 200; letter-spacing: 0.4em; color: var(--accent); line-height: 1; }
+    .f-tagline { font-size: 0.7rem; letter-spacing: 0.15em; color: #888; margin-top: 4px; }
 
-    /* 斜め区切り */
+    /* ② 斜め区切り 2% */
     .f-slash {
-      position: absolute;
-      top: 90px; left: 0; right: 0;
-      height: 28px;
+      height: 2%;
       background: linear-gradient(to bottom right, var(--primary) 50%, var(--white) 50%);
+      flex-shrink: 0;
     }
 
-    /* キャッチコピー */
+    /* ③ キャッチ + 本文 19% */
     .f-catch {
-      position: absolute;
-      top: 132px; left: 40px; right: 40px;
+      height: 19%;
+      padding: 14px 40px 0;
+      flex-shrink: 0;
     }
     .f-catch h2 {
-      font-size: 1.55rem;
+      font-size: 1.5rem;
       font-weight: 500;
-      line-height: 1.7;
+      line-height: 1.6;
       color: var(--primary);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .f-catch h2 em { color: var(--accent); font-style: normal; }
-    .f-catch p {
-      font-size: 0.83rem;
-      color: #555;
-      line-height: 1.85;
-    }
+    .f-catch p  { font-size: 0.8rem; color: #555; line-height: 1.8; }
 
-    /* サービス一覧 */
+    /* ④ サービス一覧 17% */
     .f-services {
-      position: absolute;
-      top: 270px; left: 40px; right: 40px;
+      height: 17%;
+      padding: 10px 40px 0;
+      flex-shrink: 0;
     }
-    .f-services-label {
-      font-size: 0.65rem;
+    .sec-label {
+      font-size: 0.6rem;
       letter-spacing: 0.25em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
-    .f-service-grid {
+    .f-srv-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 9px 16px;
+      gap: 7px 16px;
     }
-    .f-service-item {
+    .f-srv-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.84rem;
+      gap: 7px;
+      font-size: 0.82rem;
       color: var(--primary);
     }
-    .f-service-item::before {
+    .f-srv-item::before {
       content: '';
       width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--accent);
       flex-shrink: 0;
     }
-    .badge {
-      font-size: 0.58rem;
-      background: var(--accent);
-      color: var(--white);
-      padding: 1px 5px;
-      border-radius: 3px;
-    }
-    .badge-outline {
-      font-size: 0.58rem;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 1px 5px;
-      border-radius: 3px;
-    }
+    .badge     { font-size: 0.55rem; background: var(--accent); color: var(--white); padding: 1px 5px; border-radius: 3px; }
+    .badge-ol  { font-size: 0.55rem; border: 1px solid var(--accent); color: var(--accent); padding: 1px 5px; border-radius: 3px; }
 
-    /* 実績サムネイル（3枚） */
-    .f-thumbs {
-      position: absolute;
-      top: 448px; left: 40px; right: 40px;
+    /* ⑤ 実績サムネイル 35% */
+    .f-works {
+      height: 35%;
+      padding: 12px 40px 0;
+      flex-shrink: 0;
     }
-    .f-thumbs-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.25em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-    .f-thumb-grid {
+    .f-works-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
+      height: calc(100% - 24px);
     }
     .f-thumb {
+      border: 1px solid var(--border);
       border-radius: 5px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
     }
     .f-thumb img {
       width: 100%;
-      aspect-ratio: 4/3;
+      flex: 1;
       object-fit: cover;
       display: block;
+      min-height: 0;
     }
     .f-thumb-name {
-      padding: 4px 7px;
-      font-size: 0.62rem;
+      padding: 4px 8px 5px;
+      font-size: 0.6rem;
       color: #666;
+      flex-shrink: 0;
+      background: var(--light);
     }
 
-    /* QRゾーン */
-    .f-qr-zone {
-      position: absolute;
-      bottom: 36px; left: 0; right: 0;
+    /* ⑥ QRゾーン 12% */
+    .f-qr {
+      height: 12%;
       background: var(--light);
       border-top: 1px solid var(--border);
-      padding: 16px 40px;
+      padding: 0 40px;
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 18px;
+      flex-shrink: 0;
     }
-    .f-qr-zone canvas {
-      border: 3px solid var(--white);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-      border-radius: 4px;
-      display: block;
-    }
-    .qr-text h3 { font-size: 0.9rem; font-weight: 600; color: var(--primary); margin-bottom: 3px; }
-    .qr-text p  { font-size: 0.73rem; color: #666; line-height: 1.6; }
-    .qr-url     { font-size: 0.65rem; color: var(--accent); margin-top: 5px; }
+    .f-qr img   { border: 3px solid var(--white); box-shadow: 0 2px 6px rgba(0,0,0,0.12); border-radius: 4px; flex-shrink:0; }
+    .f-qr h3    { font-size: 0.88rem; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
+    .f-qr p     { font-size: 0.7rem; color: #666; line-height: 1.6; }
+    .f-qr-url   { font-size: 0.62rem; color: var(--accent); margin-top: 4px; }
 
-    /* 表面フッター */
+    /* ⑦ フッター 6% */
     .f-footer {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 36px;
+      height: 6%;
       background: var(--primary);
+      padding: 0 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
+      flex-shrink: 0;
     }
-    .f-footer span { font-size: 0.7rem; }
-    .f-footer .fl  { color: var(--accent); letter-spacing: 0.1em; }
-    .f-footer .fr  { color: #666; }
+    .f-footer .fl { color: var(--accent); font-size: 0.75rem; letter-spacing: 0.12em; }
+    .f-footer .fr { color: #666;          font-size: 0.68rem; }
 
-    /* ══════════════════════════════
+    /* ══════════════════════════════════
        裏面
-    ══════════════════════════════ */
+    ══════════════════════════════════ */
+
+    /* ① ヘッダー 7% */
     .b-header {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 58px;
+      height: 7%;
       background: var(--accent);
+      padding: 0 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
+      flex-shrink: 0;
     }
-    .b-header .logo     { font-size: 1.35rem; font-weight: 200; letter-spacing: 0.3em; color: var(--white); }
-    .b-header .subtitle { font-size: 0.72rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.8); }
+    .b-header .logo     { font-size: 1.4rem; font-weight: 200; letter-spacing: 0.3em; color: var(--white); }
+    .b-header .subtitle { font-size: 0.7rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.8); }
 
-    /* 実績 */
+    /* ② 実績グリッド 46% */
     .b-works {
-      position: absolute;
-      top: 70px; left: 36px; right: 36px;
+      height: 46%;
+      padding: 14px 36px 0;
+      flex-shrink: 0;
     }
-    .sec-label {
-      font-size: 0.62rem; letter-spacing: 0.25em;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 2px;
-    }
-    .sec-heading {
-      font-size: 1rem; font-weight: 500; color: var(--primary);
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 10px;
+    .b-sec-label   { font-size: 0.6rem; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 2px; }
+    .b-sec-heading {
+      font-size: 0.95rem; font-weight: 500; color: var(--primary);
+      padding-bottom: 7px; border-bottom: 1px solid var(--border); margin-bottom: 8px;
     }
     .b-works-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
+      height: calc(100% - 42px);
     }
-    .b-work-card {
+    .b-card {
       border: 1px solid var(--border);
       border-radius: 5px;
       overflow: hidden;
       background: var(--light);
+      display: flex;
+      flex-direction: column;
     }
-    .b-work-card img {
+    .b-card img {
       width: 100%;
-      aspect-ratio: 4/3;
+      flex: 1;
       object-fit: cover;
       display: block;
+      min-height: 0;
     }
-    .b-work-label { padding: 4px 7px 1px; font-size: 0.63rem; color: var(--primary); font-weight: 500; }
-    .b-work-cat   { padding: 0 7px 5px;   font-size: 0.57rem; color: var(--accent); }
+    .b-card-label { padding: 3px 7px 1px; font-size: 0.6rem; color: var(--primary); font-weight: 500; flex-shrink: 0; }
+    .b-card-cat   { padding: 0 7px 4px;   font-size: 0.54rem; color: var(--accent); flex-shrink: 0; }
 
-    /* 制作の流れ */
+    /* ③ 制作の流れ 13% */
     .b-flow {
-      position: absolute;
-      top: 310px; left: 36px; right: 36px;
+      height: 13%;
+      margin: 8px 36px 0;
+      padding: 12px 18px;
       background: var(--light);
       border: 1px solid var(--border);
       border-radius: 7px;
-      padding: 14px 18px;
+      flex-shrink: 0;
     }
-    .flow-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 10px; }
+    .flow-title { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 8px; }
     .flow-steps { display: flex; }
     .flow-step  { flex: 1; text-align: center; position: relative; }
     .flow-step:not(:last-child)::after {
-      content: '›';
-      position: absolute; right: -3px; top: 8px;
-      color: var(--accent); font-size: 1rem;
+      content: '›'; position: absolute; right: -3px; top: 8px;
+      color: var(--accent); font-size: 0.95rem;
     }
     .flow-num {
       width: 22px; height: 22px; border-radius: 50%;
       background: var(--accent); color: var(--white);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.68rem; margin: 0 auto 4px;
+      font-size: 0.66rem; margin: 0 auto 4px;
     }
-    .flow-label { font-size: 0.6rem; color: var(--primary); line-height: 1.4; }
+    .flow-label { font-size: 0.58rem; color: var(--primary); line-height: 1.4; }
 
-    /* コンタクト */
+    /* ④ コンタクト 22% */
     .b-contact {
-      position: absolute;
-      top: 415px; left: 36px; right: 36px;
+      height: 22%;
+      margin: 8px 36px 0;
+      padding: 12px 18px;
       border: 2px solid var(--primary);
       border-radius: 8px;
-      padding: 14px 18px;
       display: flex;
       align-items: center;
       gap: 16px;
-    }
-    .b-qr-pair {
-      display: flex;
-      gap: 12px;
       flex-shrink: 0;
     }
-    .b-qr-block {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-    .b-qr-block canvas {
-      border: 2px solid var(--white);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      border-radius: 3px;
-      display: block;
-    }
-    .b-qr-label { font-size: 0.55rem; color: #999; text-align: center; }
+    .b-qr-pair { display: flex; gap: 14px; flex-shrink: 0; align-items: center; }
+    .b-qr-block { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .b-qr-block img { border: 2px solid var(--white); box-shadow: 0 1px 4px rgba(0,0,0,0.1); border-radius: 3px; }
+    .b-qr-lbl { font-size: 0.54rem; color: #999; text-align: center; }
 
-    .b-contact-divider {
-      width: 1px; height: 70px;
-      background: var(--border);
-      flex-shrink: 0;
-    }
-    .b-contact-info { flex: 1; min-width: 0; }
-    .b-contact-row {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-    .b-contact-row:last-child { margin-bottom: 0; }
-    .ci-label {
-      font-size: 0.6rem; color: #aaa;
-      flex-shrink: 0; width: 48px;
-    }
-    .ci-value {
-      font-size: 0.72rem;
-      color: var(--primary);
-      font-weight: 500;
-      word-break: break-all;
-    }
-    .ci-accent { color: var(--accent); }
+    .b-divider { width: 1px; height: 70px; background: var(--border); flex-shrink: 0; }
 
-    /* 裏面フッター */
+    .b-info { flex: 1; min-width: 0; }
+    .b-row  { display: flex; align-items: baseline; gap: 8px; margin-bottom: 9px; }
+    .b-row:last-child { margin-bottom: 0; }
+    .bi-label { font-size: 0.58rem; color: #aaa; flex-shrink: 0; width: 52px; }
+    .bi-val   { font-size: 0.7rem; color: var(--primary); font-weight: 500; word-break: break-all; }
+    .bi-acc   { color: var(--accent); }
+
+    /* ⑤ フッター 6% */
     .b-footer {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 36px;
+      margin-top: auto;
+      height: 6%;
       border-top: 1px solid var(--border);
+      padding: 0 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 36px;
+      flex-shrink: 0;
     }
-    .b-footer span { font-size: 0.62rem; color: #bbb; }
+    .b-footer span { font-size: 0.6rem; color: #bbb; }
   </style>
 </head>
 <body>
 
 <div class="print-hint">
-  <div><strong>印刷・PDF保存：</strong> Ctrl+P → 用紙 A4 ／ 余白「なし」／「背景グラフィックを印刷」にチェック</div>
+  <div><strong>印刷・PDF保存：</strong> Ctrl+P → 用紙サイズ A4 ／ 余白「なし」／「背景グラフィックを印刷」にチェック</div>
   <button class="print-btn" onclick="window.print()">🖨 印刷 / PDF保存</button>
 </div>
 
@@ -393,6 +334,7 @@
     <div class="f-logo">art-at-coco</div>
     <div class="f-tagline">グラフィックデザイン　｜　印刷物制作　｜　店舗向けグッズ</div>
   </div>
+
   <div class="f-slash"></div>
 
   <div class="f-catch">
@@ -402,24 +344,24 @@
   </div>
 
   <div class="f-services">
-    <div class="f-services-label">Services</div>
-    <div class="f-service-grid">
-      <div class="f-service-item">チラシ・フライヤー</div>
-      <div class="f-service-item">ショップカード・名刺</div>
-      <div class="f-service-item">ロゴデザイン</div>
-      <div class="f-service-item">ラベル・シール <span class="badge-outline">消耗品</span></div>
-      <div class="f-service-item">パンフレット・冊子</div>
-      <div class="f-service-item">POP・メニュー表</div>
-      <div class="f-service-item">木製QRコードプレート <span class="badge">NEW</span></div>
-      <div class="f-service-item">その他ご相談ください</div>
+    <div class="sec-label">Services</div>
+    <div class="f-srv-grid">
+      <div class="f-srv-item">チラシ・フライヤー</div>
+      <div class="f-srv-item">ショップカード・名刺</div>
+      <div class="f-srv-item">ロゴデザイン</div>
+      <div class="f-srv-item">ラベル・シール <span class="badge-ol">消耗品</span></div>
+      <div class="f-srv-item">パンフレット・冊子</div>
+      <div class="f-srv-item">POP・メニュー表</div>
+      <div class="f-srv-item">木製QRコードプレート <span class="badge">NEW</span></div>
+      <div class="f-srv-item">その他ご相談ください</div>
     </div>
   </div>
 
-  <div class="f-thumbs">
-    <div class="f-thumbs-label">Works</div>
-    <div class="f-thumb-grid">
+  <div class="f-works">
+    <div class="sec-label">Works</div>
+    <div class="f-works-grid">
       <div class="f-thumb">
-        <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="チラシ">
+        <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="修繕チラシ">
         <div class="f-thumb-name">修繕サービス チラシ</div>
       </div>
       <div class="f-thumb">
@@ -433,12 +375,14 @@
     </div>
   </div>
 
-  <div class="f-qr-zone">
-    <canvas id="qr-portfolio" width="90" height="90"></canvas>
-    <div class="qr-text">
+  <!-- QR: 画像APIを使用（JavaScript不要） -->
+  <div class="f-qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
+         width="80" height="80" alt="QR ポートフォリオ">
+    <div>
       <h3>制作実績をWEBで見る</h3>
       <p>QRコードを読み取ると<br>ポートフォリオサイトをご覧いただけます。</p>
-      <div class="qr-url" id="qr-url-text"></div>
+      <div class="f-qr-url">jukuro.github.io/portfolio/</div>
     </div>
   </div>
 
@@ -458,38 +402,38 @@
   </div>
 
   <div class="b-works">
-    <div class="sec-label">Works</div>
-    <div class="sec-heading">制作実績</div>
+    <div class="b-sec-label">Works</div>
+    <div class="b-sec-heading">制作実績</div>
     <div class="b-works-grid">
-      <div class="b-work-card">
+      <div class="b-card">
         <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="修繕チラシ">
-        <div class="b-work-label">修繕サービス チラシ</div>
-        <div class="b-work-cat">チラシ</div>
+        <div class="b-card-label">修繕サービス チラシ</div>
+        <div class="b-card-cat">チラシ</div>
       </div>
-      <div class="b-work-card">
+      <div class="b-card">
         <img src="実績_webp/202402_新地_産後ケア_チラシR2.webp" alt="産後ケア">
-        <div class="b-work-label">産後ケア チラシ</div>
-        <div class="b-work-cat">チラシ</div>
+        <div class="b-card-label">産後ケア チラシ</div>
+        <div class="b-card-cat">チラシ</div>
       </div>
-      <div class="b-work-card">
+      <div class="b-card">
         <img src="実績_webp/メニューA_0418.webp" alt="メニュー">
-        <div class="b-work-label">メニュー表</div>
-        <div class="b-work-cat">メニュー</div>
+        <div class="b-card-label">メニュー表</div>
+        <div class="b-card-cat">メニュー</div>
       </div>
-      <div class="b-work-card">
+      <div class="b-card">
         <img src="実績_webp/KNOT.様_ショップカード03.webp" alt="ショップカード">
-        <div class="b-work-label">KNOT. ショップカード</div>
-        <div class="b-work-cat">ショップカード</div>
+        <div class="b-card-label">KNOT. ショップカード</div>
+        <div class="b-card-cat">ショップカード</div>
       </div>
-      <div class="b-work-card">
+      <div class="b-card">
         <img src="実績_webp/Jインソール_表面.webp" alt="パンフレット">
-        <div class="b-work-label">インソール パンフレット</div>
-        <div class="b-work-cat">パンフレット</div>
+        <div class="b-card-label">インソール パンフレット</div>
+        <div class="b-card-cat">パンフレット</div>
       </div>
-      <div class="b-work-card">
+      <div class="b-card">
         <img src="実績_webp/ラベル_メダカの卵.webp" alt="ラベル">
-        <div class="b-work-label">ラベルデザイン 各種</div>
-        <div class="b-work-cat">ラベル</div>
+        <div class="b-card-label">ラベルデザイン 各種</div>
+        <div class="b-card-cat">ラベル</div>
       </div>
     </div>
   </div>
@@ -497,51 +441,42 @@
   <div class="b-flow">
     <div class="flow-title">制作の流れ</div>
     <div class="flow-steps">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <div class="flow-label">お問い合わせ<br>ヒアリング</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <div class="flow-label">ラフ案<br>お見積もり</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <div class="flow-label">デザイン制作<br>修正対応</div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <div class="flow-label">入稿データ<br>納品</div>
-      </div>
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">お問い合わせ<br>ヒアリング</div></div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">ラフ案<br>お見積もり</div></div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">デザイン制作<br>修正対応</div></div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">入稿データ<br>納品</div></div>
     </div>
   </div>
 
   <div class="b-contact">
+    <!-- QR 2枚（画像API使用） -->
     <div class="b-qr-pair">
       <div class="b-qr-block">
-        <canvas id="qr-portfolio-back" width="80" height="80"></canvas>
-        <div class="b-qr-label">実績サイト</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=75x75&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
+             width="75" height="75" alt="QR ポートフォリオ">
+        <div class="b-qr-lbl">実績サイト</div>
       </div>
       <div class="b-qr-block">
-        <canvas id="qr-form" width="80" height="80"></canvas>
-        <div class="b-qr-label">依頼フォーム</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=75x75&data=https://forms.gle/TR6pvQFX1u1kKq4c8&color=c8945a"
+             width="75" height="75" alt="QR フォーム">
+        <div class="b-qr-lbl">依頼フォーム</div>
       </div>
     </div>
 
-    <div class="b-contact-divider"></div>
+    <div class="b-divider"></div>
 
-    <div class="b-contact-info">
-      <div class="b-contact-row">
-        <span class="ci-label">✉ メール</span>
-        <span class="ci-value" style="font-size:0.65rem;">design.atelier.art.at.coco@gmail.com</span>
+    <div class="b-info">
+      <div class="b-row">
+        <span class="bi-label">✉ メール</span>
+        <span class="bi-val" style="font-size:0.62rem;">design.atelier.art.at.coco@gmail.com</span>
       </div>
-      <div class="b-contact-row">
-        <span class="ci-label">📋 フォーム</span>
-        <span class="ci-value ci-accent">forms.gle/TR6pvQFX1u1kKq4c8</span>
+      <div class="b-row">
+        <span class="bi-label">📋 フォーム</span>
+        <span class="bi-val bi-acc">forms.gle/TR6pvQFX1u1kKq4c8</span>
       </div>
-      <div class="b-contact-row">
-        <span class="ci-label">🌐 サイト</span>
-        <span class="ci-value ci-accent">jukuro.github.io/portfolio/</span>
+      <div class="b-row">
+        <span class="bi-label">🌐 サイト</span>
+        <span class="bi-val bi-acc">jukuro.github.io/portfolio/</span>
       </div>
     </div>
   </div>
@@ -552,26 +487,5 @@
   </div>
 </div>
 
-<script>
-  const PORTFOLIO = 'https://jukuro.github.io/portfolio/';
-  const FORM      = 'https://forms.gle/TR6pvQFX1u1kKq4c8';
-
-  function makeQR(id, url, dark) {
-    var canvas = document.getElementById(id);
-    if (!canvas) return;
-    QRCode.toCanvas(canvas, url, {
-      width:  canvas.width,
-      margin: 1,
-      color:  { dark: dark || '#2c2c2c', light: '#ffffff' }
-    }, function(err){ if(err) console.warn(id, err); });
-  }
-
-  window.addEventListener('load', function() {
-    makeQR('qr-portfolio',      PORTFOLIO, '#2c2c2c');
-    makeQR('qr-portfolio-back', PORTFOLIO, '#2c2c2c');
-    makeQR('qr-form',           FORM,      '#c8945a');
-    document.getElementById('qr-url-text').textContent = PORTFOLIO;
-  });
-</script>
 </body>
 </html>
