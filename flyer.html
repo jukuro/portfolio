@@ -10,17 +10,15 @@
       --light:   #f7f4f0;
       --white:   #ffffff;
       --border:  #e8e0d6;
+      --muted:   #8a8a8a;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #888;
       font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      padding: 28px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 28px; padding: 28px;
     }
     @media print {
       body { background: none; padding: 0; gap: 0; }
@@ -29,248 +27,252 @@
     }
 
     .print-hint {
-      width: 210mm;
-      background: var(--primary);
-      color: var(--white);
-      padding: 12px 24px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 0.82rem;
+      width: 210mm; background: var(--primary); color: var(--white);
+      padding: 12px 24px; border-radius: 8px;
+      display: flex; align-items: center; gap: 16px; font-size: 0.82rem;
     }
     .print-hint strong { color: var(--accent); }
     .print-btn {
-      margin-left: auto;
-      background: var(--accent);
-      color: var(--white);
-      border: none;
-      padding: 8px 20px;
-      border-radius: 5px;
-      font-size: 0.82rem;
-      cursor: pointer;
-      font-family: inherit;
-      white-space: nowrap;
+      margin-left: auto; background: var(--accent); color: var(--white);
+      border: none; padding: 8px 20px; border-radius: 5px;
+      font-size: 0.82rem; cursor: pointer; font-family: inherit; white-space: nowrap;
     }
 
-    /* ═══ A4ページ ═══
-       297mm を各セクションのmmで分割
-       合計が必ず297mmになるよう設計
-    ═══════════════════ */
     .page {
-      width: 210mm;
-      height: 297mm;
-      background: var(--white);
-      overflow: hidden;
-      page-break-after: always;
-      display: flex;
-      flex-direction: column;
+      width: 210mm; height: 297mm; background: var(--white);
+      overflow: hidden; page-break-after: always;
+      display: flex; flex-direction: column;
     }
 
-    /* ════════════ 表面 合計297mm ════════════
-       ヘッダー  27mm
-       斜め区切り  8mm
-       キャッチ   38mm
-       サービス   38mm
-       実績     148mm  ← 大きく取る
-       QR帯      24mm
-       フッター   14mm
-       合計      297mm
+    .sec-label {
+      font-size: 0.58rem; letter-spacing: 0.28em;
+      color: var(--accent); text-transform: uppercase;
+    }
+
+    /* ═══════════ 表面 合計297mm ═══════════
+       ヘッダー 28 / 斜め 7 / キャッチ 44 / お悩み 58
+       強み 108 / QR 38 / フッター 14  = 297mm
     ═══════════════════════════════════════ */
 
     .f-header {
-      height: 27mm;
-      background: var(--primary);
-      padding: 0 38px;
-      display: flex; flex-direction: column; justify-content: center;
-      flex-shrink: 0;
+      height: 28mm; background: var(--primary); padding: 0 38px;
+      display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;
     }
-    .f-logo    { font-size: 2.2rem; font-weight: 200; letter-spacing: 0.4em; color: var(--accent); line-height: 1; }
-    .f-tagline { font-size: 0.68rem; letter-spacing: 0.14em; color: #888; margin-top: 5px; }
+    .f-logo    { font-size: 2.3rem; font-weight: 200; letter-spacing: 0.4em; color: var(--accent); line-height: 1; }
+    .f-tagline { font-size: 0.67rem; letter-spacing: 0.16em; color: #909090; margin-top: 7px; }
 
     .f-slash {
-      height: 8mm;
+      height: 7mm; flex-shrink: 0;
       background: linear-gradient(to bottom right, var(--primary) 50%, var(--white) 50%);
-      flex-shrink: 0;
     }
 
-    .f-catch {
-      height: 38mm;
-      padding: 8px 38px 0;
-      display: flex; flex-direction: column; justify-content: center;
-      flex-shrink: 0;
+    .f-hero {
+      height: 44mm; padding: 0 38px;
+      display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;
     }
-    .f-catch h2 {
-      font-size: 1.45rem; font-weight: 500; line-height: 1.65;
-      color: var(--primary); margin-bottom: 7px;
+    .f-hero-lead {
+      font-size: 0.92rem; color: var(--muted); margin-bottom: 9px; letter-spacing: 0.04em;
     }
-    .f-catch h2 em { color: var(--accent); font-style: normal; }
-    .f-catch p  { font-size: 0.78rem; color: #555; line-height: 1.8; }
+    .f-hero h1 {
+      font-size: 1.92rem; font-weight: 600; line-height: 1.45; color: var(--primary);
+      letter-spacing: 0.01em;
+    }
+    .f-hero h1 em {
+      font-style: normal; color: var(--accent);
+      border-bottom: 3px solid var(--accent); padding-bottom: 2px;
+    }
 
-    .f-services {
-      height: 38mm;
-      padding: 6px 38px 0;
-      display: flex; flex-direction: column; justify-content: center;
-      flex-shrink: 0;
+    .f-problem {
+      height: 58mm; margin: 0 38px;
+      background: var(--light); border-radius: 8px; padding: 16px 22px;
+      display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;
     }
-    .sec-label {
-      font-size: 0.6rem; letter-spacing: 0.25em;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+    .f-problem-title {
+      font-size: 0.88rem; font-weight: 700; color: var(--primary);
+      margin-bottom: 13px; letter-spacing: 0.03em;
     }
-    .f-srv-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 7px 14px;
+    .f-problem li {
+      list-style: none; font-size: 0.83rem; color: #4a4a4a;
+      display: flex; align-items: flex-start; gap: 10px; margin-bottom: 9px; line-height: 1.5;
     }
-    .f-srv-item {
-      display: flex; align-items: center; gap: 7px;
-      font-size: 0.81rem; color: var(--primary);
+    .f-problem li:last-child { margin-bottom: 0; }
+    .f-problem li::before {
+      content: '✓'; color: var(--accent); font-weight: 700;
+      font-size: 0.9rem; flex-shrink: 0; line-height: 1.4;
     }
-    .f-srv-item::before {
-      content: ''; width: 5px; height: 5px; border-radius: 50%;
-      background: var(--accent); flex-shrink: 0;
-    }
-    .badge    { font-size: 0.54rem; background: var(--accent); color: var(--white); padding: 1px 5px; border-radius: 3px; }
-    .badge-ol { font-size: 0.54rem; border: 1px solid var(--accent); color: var(--accent); padding: 1px 5px; border-radius: 3px; }
 
-    .f-works {
-      height: 148mm;
-      padding: 6px 38px 8px;
-      display: flex; flex-direction: column;
-      flex-shrink: 0;
+    .f-strength {
+      height: 108mm; padding: 14px 38px 0;
+      display: flex; flex-direction: column; flex-shrink: 0;
     }
-    .f-works-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    .f-strength .sec-label { margin-bottom: 3px; }
+    .f-strength-head {
+      font-size: 1.02rem; font-weight: 700; color: var(--primary);
+      margin-bottom: 12px; letter-spacing: 0.02em;
+    }
+    .st-list {
       flex: 1; min-height: 0;
+      display: flex; flex-direction: column; gap: 11px; padding-bottom: 14px;
     }
-    .f-thumb {
-      border: 1px solid var(--border); border-radius: 5px;
-      overflow: hidden; display: flex; flex-direction: column;
+    .st-item {
+      flex: 1; min-height: 0;
+      display: flex; gap: 18px; align-items: center;
+      background: var(--light); border-left: 3px solid var(--accent);
+      border-radius: 6px; padding: 0 20px;
     }
-    .f-thumb img {
-      width: 100%; flex: 1; object-fit: cover; display: block; min-height: 0;
+    .st-num {
+      font-size: 1.7rem; font-weight: 300; color: var(--accent);
+      line-height: 1; flex-shrink: 0; width: 42px; letter-spacing: 0.02em;
+      border-right: 1px solid var(--border); padding-right: 16px;
     }
-    .f-thumb-name {
-      padding: 4px 8px 5px; font-size: 0.6rem; color: #666;
-      flex-shrink: 0; background: var(--light);
+    .st-title {
+      font-size: 1.02rem; font-weight: 700; color: var(--primary);
+      margin-bottom: 6px; letter-spacing: 0.01em;
     }
+    .st-desc { font-size: 0.79rem; color: #5a5a5a; line-height: 1.75; }
 
     .f-qr {
-      height: 24mm;
-      background: var(--light); border-top: 1px solid var(--border);
-      padding: 0 38px; display: flex; align-items: center; gap: 16px;
-      flex-shrink: 0;
+      height: 38mm; background: var(--light); border-top: 1px solid var(--border);
+      padding: 0 38px; display: flex; align-items: center; gap: 20px; flex-shrink: 0;
     }
-    .f-qr img   { border: 3px solid var(--white); box-shadow: 0 2px 6px rgba(0,0,0,0.12); border-radius: 4px; flex-shrink: 0; }
-    .f-qr h3    { font-size: 0.86rem; font-weight: 600; color: var(--primary); margin-bottom: 2px; }
-    .f-qr p     { font-size: 0.68rem; color: #666; line-height: 1.6; }
-    .f-qr-url   { font-size: 0.6rem; color: var(--accent); margin-top: 4px; }
+    .f-qr img {
+      border: 4px solid var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+      border-radius: 5px; flex-shrink: 0;
+    }
+    .f-qr h3 { font-size: 1.02rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+    .f-qr p  { font-size: 0.75rem; color: #666; line-height: 1.7; }
+    .f-qr-url {
+      font-size: 0.68rem; color: var(--accent); margin-top: 7px;
+      letter-spacing: 0.03em; font-weight: 500;
+    }
 
     .f-footer {
-      height: 14mm;
-      background: var(--primary);
-      padding: 0 38px; display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
+      height: 14mm; background: var(--primary); padding: 0 38px;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
     }
-    .f-footer .fl { color: var(--accent); font-size: 0.73rem; letter-spacing: 0.12em; }
-    .f-footer .fr { color: #666;          font-size: 0.67rem; }
+    .f-footer .fl { color: var(--accent); font-size: 0.75rem; letter-spacing: 0.14em; }
+    .f-footer .fr { color: #777; font-size: 0.67rem; }
 
-    /* ════════════ 裏面 合計297mm ════════════
-       ヘッダー   20mm
-       実績グリッド 148mm
-       制作の流れ   40mm
-       コンタクト   75mm
-       フッター    14mm
-       合計       297mm
+    /* ═══════════ 裏面 合計297mm ═══════════
+       ヘッダー 20 / 料金 108 / 流れ 44
+       実績 44 / 連絡先 67 / フッター 14  = 297mm
     ═══════════════════════════════════════ */
 
     .b-header {
-      height: 20mm;
-      background: var(--accent);
-      padding: 0 38px; display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
+      height: 20mm; background: var(--accent); padding: 0 38px;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
     }
     .b-header .logo     { font-size: 1.4rem; font-weight: 200; letter-spacing: 0.3em; color: var(--white); }
-    .b-header .subtitle { font-size: 0.7rem; letter-spacing: 0.14em; color: rgba(255,255,255,0.8); }
+    .b-header .subtitle { font-size: 0.7rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.88); }
 
-    .b-works {
-      height: 148mm;
-      padding: 10px 34px 0;
-      flex-shrink: 0; display: flex; flex-direction: column;
-    }
-    .b-sec-label   { font-size: 0.59rem; letter-spacing: 0.25em; color: var(--accent); text-transform: uppercase; margin-bottom: 2px; }
     .b-sec-heading {
-      font-size: 0.92rem; font-weight: 500; color: var(--primary);
-      padding-bottom: 6px; border-bottom: 1px solid var(--border); margin-bottom: 7px;
+      font-size: 0.98rem; font-weight: 700; color: var(--primary);
+      padding-bottom: 7px; border-bottom: 1px solid var(--border);
+      margin-bottom: 11px; letter-spacing: 0.02em;
     }
-    .b-works-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px;
+
+    .b-price {
+      height: 108mm; padding: 13px 38px 0;
+      display: flex; flex-direction: column; flex-shrink: 0;
+    }
+    .b-price-grid {
       flex: 1; min-height: 0;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px;
     }
-    .b-card {
-      border: 1px solid var(--border); border-radius: 5px;
-      overflow: hidden; display: flex; flex-direction: column;
+    .pr-item {
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 0 14px; display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
     }
-    .b-card img { width: 100%; flex: 1; object-fit: cover; display: block; min-height: 0; }
-    .b-card-label { padding: 3px 7px 1px; font-size: 0.59rem; color: var(--primary); font-weight: 500; flex-shrink: 0; }
-    .b-card-cat   { padding: 0 7px 4px; font-size: 0.53rem; color: var(--accent); flex-shrink: 0; }
+    .pr-name { font-size: 0.78rem; color: var(--primary); font-weight: 600; }
+    .pr-badge {
+      font-size: 0.5rem; background: var(--accent); color: var(--white);
+      padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: 1.5px;
+    }
+    .pr-val  { font-size: 1.02rem; color: var(--accent); font-weight: 700; white-space: nowrap; }
+    .pr-val small { font-size: 0.6rem; color: var(--muted); font-weight: 400; margin-left: 1px; }
+    .b-price-note {
+      font-size: 0.65rem; color: var(--muted); margin-top: 9px; line-height: 1.6; flex-shrink: 0;
+    }
 
     .b-flow {
-      height: 40mm;
-      margin: 0 34px;
-      background: var(--light); border: 1px solid var(--border); border-radius: 7px;
-      padding: 10px 18px; display: flex; flex-direction: column; justify-content: center;
-      flex-shrink: 0;
+      height: 44mm; margin: 0 38px;
+      background: var(--light); border-radius: 8px;
+      padding: 13px 20px; display: flex; flex-direction: column; justify-content: center; flex-shrink: 0;
     }
-    .flow-title { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 10px; }
+    .flow-title {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--primary); margin-bottom: 13px;
+    }
     .flow-steps { display: flex; }
     .flow-step  { flex: 1; text-align: center; position: relative; }
     .flow-step:not(:last-child)::after {
-      content: '›'; position: absolute; right: -3px; top: 8px;
-      color: var(--accent); font-size: 0.92rem;
+      content: '›'; position: absolute; right: -4px; top: 6px;
+      color: var(--accent); font-size: 1.05rem;
     }
     .flow-num {
-      width: 22px; height: 22px; border-radius: 50%;
+      width: 25px; height: 25px; border-radius: 50%;
       background: var(--accent); color: var(--white);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.65rem; margin: 0 auto 5px;
+      font-size: 0.7rem; font-weight: 600; margin: 0 auto 7px;
     }
-    .flow-label { font-size: 0.57rem; color: var(--primary); line-height: 1.45; }
+    .flow-label { font-size: 0.63rem; color: var(--primary); line-height: 1.5; }
+
+    .b-profile {
+      height: 44mm; margin: 0 38px;
+      display: flex; align-items: center; gap: 20px; flex-shrink: 0;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .b-pf-photo {
+      width: 104px; height: 104px; border-radius: 50%; flex-shrink: 0;
+      overflow: hidden; background: linear-gradient(135deg, #e8ddd2, #c8945a33);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); font-size: 0.58rem; letter-spacing: 0.16em; text-align: center;
+    }
+    .b-pf-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .b-pf-body { flex: 1; min-width: 0; }
+    .b-pf-title {
+      font-size: 0.88rem; font-weight: 700; color: var(--primary);
+      margin: 3px 0 7px; letter-spacing: 0.02em;
+    }
+    .b-pf-text { font-size: 0.73rem; color: #5a5a5a; line-height: 1.85; }
+    .b-pf-sign {
+      font-size: 0.68rem; color: var(--accent); margin-top: 8px;
+      letter-spacing: 0.08em; text-align: right;
+    }
 
     .b-contact {
-      height: 75mm;
-      margin: 0 34px;
-      border: 2px solid var(--primary); border-radius: 8px;
-      padding: 12px 20px;
-      display: flex; flex-direction: column; justify-content: space-between;
+      height: 67mm; margin: 0 38px;
+      border: 2px solid var(--primary); border-radius: 9px;
+      padding: 13px 20px; display: flex; flex-direction: column; justify-content: space-between;
       flex-shrink: 0;
     }
-    .b-ct-head  { flex-shrink: 0; }
-    .b-ct-title { font-size: 0.93rem; font-weight: 700; color: var(--primary); margin: 2px 0 2px; }
-    .b-ct-sub   { font-size: 0.62rem; color: #777; }
+    .b-ct-title { font-size: 1rem; font-weight: 700; color: var(--primary); margin: 3px 0 3px; }
+    .b-ct-sub   { font-size: 0.66rem; color: #777; }
     .b-ct-rule  { height: 1px; background: var(--border); flex-shrink: 0; }
-    .b-ct-body  { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
-    .b-ct-note  { font-size: 0.57rem; color: #bbb; text-align: center; flex-shrink: 0; }
+    .b-ct-body  { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
 
-    .b-qr-pair  { display: flex; gap: 18px; flex-shrink: 0; align-items: center; }
+    .b-qr-pair  { display: flex; gap: 16px; flex-shrink: 0; align-items: center; }
     .b-qr-block { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .b-qr-block img { border: 2px solid var(--white); box-shadow: 0 1px 5px rgba(0,0,0,0.12); border-radius: 4px; }
-    .b-qr-lbl   { font-size: 0.56rem; color: #888; text-align: center; }
+    .b-qr-block img {
+      border: 2px solid var(--white); box-shadow: 0 1px 5px rgba(0,0,0,0.13); border-radius: 4px;
+    }
+    .b-qr-lbl { font-size: 0.58rem; color: var(--muted); text-align: center; }
 
-    .b-divider { width: 1px; height: 90px; background: var(--border); flex-shrink: 0; }
+    .b-divider { width: 1px; height: 86px; background: var(--border); flex-shrink: 0; }
 
     .b-info { flex: 1; min-width: 0; }
-    .b-row  { display: flex; align-items: baseline; gap: 8px; margin-bottom: 13px; }
+    .b-row  { display: flex; align-items: baseline; gap: 9px; margin-bottom: 12px; }
     .b-row:last-child { margin-bottom: 0; }
-    .bi-label { font-size: 0.61rem; color: #aaa; flex-shrink: 0; width: 54px; }
-    .bi-val   { font-size: 0.73rem; color: var(--primary); font-weight: 500; word-break: break-all; }
+    .bi-label { font-size: 0.62rem; color: #aaa; flex-shrink: 0; width: 56px; }
+    .bi-val   { font-size: 0.74rem; color: var(--primary); font-weight: 500; word-break: break-all; }
     .bi-acc   { color: var(--accent); }
 
     .b-footer {
-      height: 14mm;
-      border-top: 1px solid var(--border);
-      padding: 0 34px; display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
+      height: 14mm; border-top: 1px solid var(--border); padding: 0 38px;
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
     }
-    .b-footer span { font-size: 0.6rem; color: #bbb; }
+    .b-footer span { font-size: 0.62rem; color: #bbb; }
   </style>
 </head>
 <body>
@@ -280,131 +282,175 @@
   <button class="print-btn" onclick="window.print()">🖨 印刷 / PDF保存</button>
 </div>
 
-<!-- ══════ 表面 ══════ -->
+<!-- ══════════ 表面 ══════════ -->
 <div class="page">
+
   <div class="f-header">
     <div class="f-logo">art-at-coco</div>
-    <div class="f-tagline">グラフィックデザイン　｜　印刷物制作　｜　店舗向けグッズ</div>
+    <!-- ▼ 地域名を入れると「地域密着」がより伝わります（例：宮崎・都城の…） -->
+    <div class="f-tagline">地域のお店とつくる、グラフィックデザイン</div>
   </div>
+
   <div class="f-slash"></div>
-  <div class="f-catch">
-    <h2>「こんなもの、作れますか？」<br>そのひとことから、<em>デザイン</em>が始まります。</h2>
-    <p>チラシ・ショップカード・ロゴ・ラベルなど、地域の事業者さまの印刷物制作をお手伝いします。<br>
-    ご要望をヒアリングして、印刷入稿データまで丁寧に対応。お見積もりは無料です。</p>
+
+  <div class="f-hero">
+    <div class="f-hero-lead">「1種類だけなんですけど……」</div>
+    <h1>その<em>ちいさな相談</em>から、<br>お受けしています。</h1>
   </div>
-  <div class="f-services">
-    <div class="sec-label">Services</div>
-    <div class="f-srv-grid">
-      <div class="f-srv-item">チラシ・フライヤー</div>
-      <div class="f-srv-item">ショップカード・名刺</div>
-      <div class="f-srv-item">ロゴデザイン</div>
-      <div class="f-srv-item">ラベル・シール <span class="badge-ol">消耗品</span></div>
-      <div class="f-srv-item">パンフレット・冊子</div>
-      <div class="f-srv-item">POP・メニュー表</div>
-      <div class="f-srv-item">木製QRコードプレート <span class="badge">NEW</span></div>
-      <div class="f-srv-item">その他ご相談ください</div>
+
+  <div class="f-problem">
+    <div class="f-problem-title">こんなこと、ありませんか？</div>
+    <ul>
+      <li>少ない部数だと、印刷会社に断られてしまう</li>
+      <li>デザイン事務所は敷居が高くて、相談しづらい</li>
+      <li>チラシ・ロゴ・ラベル…頼む先がバラバラで手間</li>
+    </ul>
+  </div>
+
+  <div class="f-strength">
+    <div class="sec-label">Our Strength</div>
+    <div class="f-strength-head">art-at-coco が選ばれる 3 つの理由</div>
+    <div class="st-list">
+
+      <div class="st-item">
+        <div class="st-num">01</div>
+        <div class="st-body">
+          <div class="st-title">小さなご依頼から、歓迎です</div>
+          <div class="st-desc">「ラベル1種類だけ」「名刺だけ」もお気軽に。小部数・試作・季節ものにも柔軟に対応します。</div>
+        </div>
+      </div>
+
+      <div class="st-item">
+        <div class="st-num">02</div>
+        <div class="st-body">
+          <div class="st-title">地元だから、会って相談できます</div>
+          <div class="st-desc">メールのやりとりだけで終わらせません。直接お会いして、お店の雰囲気ごと汲み取ってデザインします。</div>
+        </div>
+      </div>
+
+      <div class="st-item">
+        <div class="st-num">03</div>
+        <div class="st-body">
+          <div class="st-title">印刷物まわりは、窓口ひとつで</div>
+          <div class="st-desc">チラシ・ショップカード・ロゴ・ラベル・POP・メニュー。別々に探す手間がなくなります。</div>
+        </div>
+      </div>
+
     </div>
   </div>
-  <div class="f-works">
-    <div class="sec-label">Works</div>
-    <div class="f-works-grid">
-      <div class="f-thumb">
-        <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="修繕チラシ">
-        <div class="f-thumb-name">修繕サービス チラシ</div>
-      </div>
-      <div class="f-thumb">
-        <img src="実績_webp/KNOT.様_ショップカード03.webp" alt="ショップカード">
-        <div class="f-thumb-name">KNOT. ショップカード</div>
-      </div>
-      <div class="f-thumb">
-        <img src="実績_webp/ラベル_メダカの卵.webp" alt="ラベル">
-        <div class="f-thumb-name">ラベルデザイン 各種</div>
-      </div>
-    </div>
-  </div>
+
   <div class="f-qr">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=72x72&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
-         width="72" height="72" alt="QR">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=104x104&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
+         width="104" height="104" alt="QR ポートフォリオ">
     <div>
-      <h3>制作実績をWEBで見る</h3>
-      <p>QRコードを読み取ると<br>ポートフォリオサイトをご覧いただけます。</p>
+      <h3>実績はWEBでご覧いただけます</h3>
+      <p>これまでお手伝いした制作物を、カテゴリ別にまとめています。<br>
+      スマートフォンでQRコードを読み取ってください。</p>
       <div class="f-qr-url">jukuro.github.io/portfolio/</div>
     </div>
   </div>
+
   <div class="f-footer">
     <span class="fl">art-at-coco</span>
-    <span class="fr">グラフィックデザイン ／ 印刷物制作</span>
+    <span class="fr">お見積もり無料 ／ まずはお気軽にご相談ください</span>
   </div>
+
 </div>
 
-<!-- ══════ 裏面 ══════ -->
+<!-- ══════════ 裏面 ══════════ -->
 <div class="page">
+
   <div class="b-header">
     <div class="logo">art-at-coco</div>
-    <div class="subtitle">制作実績 Portfolio</div>
+    <div class="subtitle">料金目安・制作の流れ</div>
   </div>
-  <div class="b-works">
-    <div class="b-sec-label">Works</div>
-    <div class="b-sec-heading">制作実績</div>
-    <div class="b-works-grid">
-      <div class="b-card">
-        <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="修繕チラシ">
-        <div class="b-card-label">修繕サービス チラシ</div>
-        <div class="b-card-cat">チラシ</div>
+
+  <div class="b-price">
+    <div class="b-sec-heading">対応できるもの・料金の目安</div>
+    <div class="b-price-grid">
+      <div class="pr-item">
+        <div class="pr-name">チラシ・フライヤー</div>
+        <div class="pr-val">¥15,000<small>〜</small></div>
       </div>
-      <div class="b-card">
-        <img src="実績_webp/202402_新地_産後ケア_チラシR2.webp" alt="産後ケア">
-        <div class="b-card-label">産後ケア チラシ</div>
-        <div class="b-card-cat">チラシ</div>
+      <div class="pr-item">
+        <div class="pr-name">ショップカード・名刺</div>
+        <div class="pr-val">¥10,000<small>〜</small></div>
       </div>
-      <div class="b-card">
-        <img src="実績_webp/メニューA_0418.webp" alt="メニュー">
-        <div class="b-card-label">メニュー表</div>
-        <div class="b-card-cat">メニュー</div>
+      <div class="pr-item">
+        <div class="pr-name">ロゴデザイン</div>
+        <div class="pr-val">¥30,000<small>〜</small></div>
       </div>
-      <div class="b-card">
-        <img src="実績_webp/KNOT.様_ショップカード03.webp" alt="ショップカード">
-        <div class="b-card-label">KNOT. ショップカード</div>
-        <div class="b-card-cat">ショップカード</div>
+      <div class="pr-item">
+        <div class="pr-name">ラベル・シール</div>
+        <div class="pr-val">¥8,000<small>〜</small></div>
       </div>
-      <div class="b-card">
-        <img src="実績_webp/Jインソール_表面.webp" alt="パンフレット">
-        <div class="b-card-label">インソール パンフレット</div>
-        <div class="b-card-cat">パンフレット</div>
+      <div class="pr-item">
+        <div class="pr-name">パンフレット・冊子</div>
+        <div class="pr-val">¥25,000<small>〜</small></div>
       </div>
-      <div class="b-card">
-        <img src="実績_webp/ラベル_メダカの卵.webp" alt="ラベル">
-        <div class="b-card-label">ラベルデザイン 各種</div>
-        <div class="b-card-cat">ラベル</div>
+      <div class="pr-item">
+        <div class="pr-name">POP・メニュー表</div>
+        <div class="pr-val">¥10,000<small>〜</small></div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-name">木製QRコードプレート<span class="pr-badge">NEW</span></div>
+        <div class="pr-val">¥6,000<small>〜</small></div>
+      </div>
+      <div class="pr-item">
+        <div class="pr-name">その他・ご相談ください</div>
+        <div class="pr-val" style="font-size:0.78rem;">お見積もり無料</div>
       </div>
     </div>
+    <div class="b-price-note">
+      ※ 表示はデザイン料の目安（税込）です。ページ数・修正回数・印刷の有無により変動します。<br>
+      ※ 印刷入稿データまで一貫して制作します。小部数・1種類のみのご依頼も承ります。
+    </div>
   </div>
+
   <div class="b-flow">
     <div class="flow-title">制作の流れ</div>
     <div class="flow-steps">
-      <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">お問い合わせ<br>ヒアリング</div></div>
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-label">ご相談<br>ヒアリング</div></div>
       <div class="flow-step"><div class="flow-num">2</div><div class="flow-label">ラフ案<br>お見積もり</div></div>
       <div class="flow-step"><div class="flow-num">3</div><div class="flow-label">デザイン制作<br>修正対応</div></div>
       <div class="flow-step"><div class="flow-num">4</div><div class="flow-label">入稿データ<br>納品</div></div>
     </div>
   </div>
+
+  <div class="b-profile">
+    <!-- ▼ 顔写真に差し替えると「顔が見える」がぐっと伝わります
+         <img src="profile.jpg" alt="art-at-coco"> を下の div の中に入れてください -->
+    <div class="b-pf-photo">PHOTO</div>
+    <div class="b-pf-body">
+      <div class="sec-label">Greeting</div>
+      <div class="b-pf-title">ごあいさつ</div>
+      <div class="b-pf-text">
+        小さなお店の「伝えたい」を、かたちにするお手伝いをしています。<br>
+        デザインの専門用語は使いません。「なんとなくこんな感じ」からご一緒に考えます。<br>
+        まずは世間話からで大丈夫です。どうぞお気軽にお声がけください。
+      </div>
+      <!-- ▼ お名前を入れてください -->
+      <div class="b-pf-sign">art-at-coco</div>
+    </div>
+  </div>
+
   <div class="b-contact">
-    <div class="b-ct-head">
-      <div class="b-sec-label">Contact</div>
-      <div class="b-ct-title">ご依頼・お問い合わせ</div>
-      <div class="b-ct-sub">お見積もり無料 ／ まずはお気軽にご相談ください</div>
+    <div>
+      <div class="sec-label">Contact</div>
+      <div class="b-ct-title">ご相談・お問い合わせ</div>
+      <div class="b-ct-sub">お見積もり無料 ／ 「作れますか？」のひとことからで大丈夫です</div>
     </div>
     <div class="b-ct-rule"></div>
     <div class="b-ct-body">
       <div class="b-qr-pair">
         <div class="b-qr-block">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
-               width="100" height="100" alt="QR ポートフォリオ">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https://jukuro.github.io/portfolio/&color=2c2c2c"
+               width="96" height="96" alt="QR 実績サイト">
           <div class="b-qr-lbl">実績サイト</div>
         </div>
         <div class="b-qr-block">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://forms.gle/TR6pvQFX1u1kKq4c8&color=c8945a"
-               width="100" height="100" alt="QR フォーム">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=96x96&data=https://forms.gle/TR6pvQFX1u1kKq4c8&color=c8945a"
+               width="96" height="96" alt="QR 依頼フォーム">
           <div class="b-qr-lbl">依頼フォーム</div>
         </div>
       </div>
@@ -412,7 +458,7 @@
       <div class="b-info">
         <div class="b-row">
           <span class="bi-label">✉ メール</span>
-          <span class="bi-val" style="font-size:0.63rem;">design.atelier.art.at.coco@gmail.com</span>
+          <span class="bi-val" style="font-size:0.65rem;">design.atelier.art.at.coco@gmail.com</span>
         </div>
         <div class="b-row">
           <span class="bi-label">📋 フォーム</span>
@@ -424,12 +470,13 @@
         </div>
       </div>
     </div>
-    <div class="b-ct-note">QRコードを読み取るか、メール・フォームからお気軽にどうぞ ／ お見積もり無料</div>
   </div>
+
   <div class="b-footer">
-    <span>お見積もり無料 ／ まずはお気軽にご相談ください</span>
+    <span>デザインで、想いを形に。</span>
     <span>&copy; 2026 art-at-coco</span>
   </div>
+
 </div>
 
 </body>
