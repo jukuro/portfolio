@@ -1,876 +1,571 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>art-at-coco｜宮崎県北のグラフィックデザイン・印刷物制作</title>
-  <meta name="description" content="宮崎県北を拠点に、チラシ・ショップカード・ロゴ・ラベル・メニューなど、お店の印刷物をデザインから印刷の手配までお手伝いします。小さなご依頼も歓迎、お見積もりは無料です。">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon.png" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="favicon.png">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="art-at-coco">
-  <meta property="og:title" content="art-at-coco｜宮崎県北のグラフィックデザイン・印刷物制作">
-  <meta property="og:description" content="チラシ・ショップカード・ロゴ・ラベル・メニューなど、お店の印刷物をデザインから印刷の手配までお手伝いします。小さなご依頼も歓迎です。">
-  <meta property="og:url" content="https://jukuro.github.io/portfolio/">
-  <meta property="og:image" content="https://jukuro.github.io/portfolio/ogp.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary_large_image">
-  <style>
-    :root {
-      --primary: #2c2c2c;
-      --accent: #c8945a;
-      --light: #f7f4f0;
-      --white: #ffffff;
-      --gray: #888;
-      --border: #e8e0d6;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-      background: var(--light);
-      color: var(--primary);
-      line-height: 1.7;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>art@coco｜宮崎県北のデザインアトリエ</title>
+<meta name="description" content="宮崎県北のデザインアトリエ art@coco（アートアットココ）。チラシ・ショップカード・ロゴ・ラベル・メニュー表など、お店の印刷物をデザインから印刷の手配までまるごとお引き受けします。">
+<meta property="og:title" content="art@coco｜宮崎県北のデザインアトリエ">
+<meta property="og:description" content="想いをカタチに、あなたの「伝えたい」をデザインします。デザインから印刷まで、まるごとおまかせください。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jukuro.github.io/portfolio/">
+<meta property="og:image" content="https://jukuro.github.io/portfolio/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* ===== チラシ（art@coco_チラシ.pdf）の配色・意匠に合わせた ===== */
+:root{
+  --green:#89c45c;
+  --green-deep:#5f9437;
+  --green-pale:#f3f8ea;
+  --green-line:#d8e8c4;
+  --cream:#fffdf7;
+  --yellow:#fff1ad;
+  --brown:#956511;
+  --ink:#3b3b3b;
+  --muted:#8c8c86;
+  --white:#fff;
+  --round:'Zen Maru Gothic','Hiragino Maru Gothic ProN','Yu Gothic',sans-serif;
+  --gothic:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  font-family:var(--gothic);color:var(--ink);background:var(--white);
+  font-size:16px;line-height:1.9;-webkit-font-smoothing:antialiased;
+}
+img{display:block;max-width:100%;}
+a{color:inherit;}
+.inner{width:min(1080px,100% - 40px);margin-inline:auto;}
 
-    /* ヘッダー */
-    header {
-      background: var(--primary);
-      color: var(--white);
-      padding: 60px 40px 50px;
-      text-align: center;
-    }
-    header .logo {
-      font-size: 2.4rem;
-      font-weight: 300;
-      letter-spacing: 0.3em;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-    header .tagline {
-      font-size: 0.9rem;
-      letter-spacing: 0.2em;
-      color: #bbb;
-    }
+/* ===== ヘッダー ===== */
+header{
+  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--green-line);
+}
+.head-in{
+  width:min(1080px,100% - 40px);margin-inline:auto;
+  display:flex;align-items:center;gap:20px;padding:10px 0;
+}
+.head-logo img{height:38px;width:auto;}
+header nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap;}
+header nav a{
+  font-family:var(--round);font-size:.84rem;text-decoration:none;color:var(--ink);
+  padding:7px 13px;border-radius:999px;white-space:nowrap;
+}
+header nav a:hover{background:var(--green-pale);color:var(--green-deep);}
+header nav a.cta{background:var(--green);color:#fff;}
+header nav a.cta:hover{background:var(--green-deep);color:#fff;}
 
-    /* ナビ */
-    nav {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      padding: 4px 0;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.2s;
-    }
-    nav a:hover { border-color: var(--accent); }
+/* ===== ヒーロー ===== */
+.hero{position:relative;overflow:hidden;background:#eaf2f7;}
+.hero-bg{
+  position:absolute;inset:0;background:url("assets/hero-sky.jpg") center 30%/cover no-repeat;
+}
+.hero-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.88) 38%,rgba(255,255,255,.1) 64%,rgba(255,255,255,0) 100%);
+}
+.hero-in{position:relative;width:min(1080px,100% - 40px);margin-inline:auto;padding:52px 0 44px;}
+.catch{display:flex;flex-direction:column;align-items:flex-start;gap:7px;margin-bottom:26px;}
+.catch span{
+  background:var(--green);color:#fff;font-family:var(--round);font-weight:500;
+  font-size:clamp(1.02rem,3.4vw,1.42rem);letter-spacing:.08em;line-height:1.5;
+  padding:5px 16px;transform:skewX(-7deg);box-shadow:0 1px 3px rgba(95,148,55,.25);
+}
+.catch span i{font-style:normal;display:inline-block;transform:skewX(7deg);}
+.hero-logo img{width:min(320px,76%);height:auto;margin-bottom:20px;}
+.hero-note{
+  font-family:var(--round);font-size:clamp(.82rem,2.6vw,.98rem);line-height:2.1;
+  color:var(--green-deep);font-weight:500;
+}
+.hero-note b{font-weight:700;}
+.forest-band img{width:100%;height:clamp(58px,11vw,120px);object-fit:cover;object-position:center 40%;}
 
-    /* セクション共通 */
-    section {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    .section-title {
-      font-size: 1.1rem;
-      letter-spacing: 0.25em;
-      color: var(--accent);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .section-subtitle {
-      font-size: 1.6rem;
-      font-weight: 500;
-      margin-bottom: 40px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border);
-    }
+/* ===== 共通セクション ===== */
+section{padding:60px 0;}
+.tag-head{
+  display:inline-block;background:var(--green);color:#fff;font-family:var(--round);
+  font-weight:700;font-size:1.02rem;letter-spacing:.1em;padding:5px 26px;border-radius:999px;
+}
+.head-row{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:28px;}
+.head-lead{font-family:var(--round);font-size:.96rem;color:#55554f;}
+.sec-sub{font-size:.88rem;color:var(--muted);margin-top:-14px;margin-bottom:26px;}
 
-    /* About */
-    #about {
-      background: var(--white);
-      max-width: 100%;
-      padding: 0;
-    }
-    #about .inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    #about .about-text p {
-      color: #555;
-      margin-bottom: 16px;
-      font-size: 0.95rem;
-    }
-    .services {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
-    }
-    .service-tag {
-      background: var(--light);
-      border: 1px solid var(--border);
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      letter-spacing: 0.05em;
-    }
+/* ===== できること ===== */
+#services{background:var(--cream);}
+.svc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:22px 10px;}
+.svc{text-align:center;}
+.svc img{width:100%;max-width:140px;height:auto;margin:0 auto 6px;}
+.svc b{display:block;font-family:var(--round);font-weight:500;font-size:.86rem;line-height:1.5;}
+.needs{
+  margin-top:38px;display:grid;grid-template-columns:1fr 1fr;gap:10px 28px;
+}
+.need{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;line-height:1.8;}
+.need::before{
+  content:'';flex:0 0 16px;height:16px;margin-top:6px;border-radius:50% 0 50% 50%;
+  background:var(--green);transform:rotate(-20deg);
+}
+.needs-note{
+  margin-top:22px;text-align:center;font-family:var(--round);color:var(--green-deep);
+  font-size:.94rem;
+}
 
-    /* Works グリッド */
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
-    }
-    .work-card {
-      background: var(--white);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      transition: transform 0.2s, box-shadow 0.2s;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-    }
-    .work-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-    }
-    .work-thumb {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      display: block;
-      background: var(--light);
-    }
-    .work-thumb-pdf {
-      width: 100%;
-      aspect-ratio: 4/3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f0ebe4, #e8ddd2);
-      color: var(--gray);
-    }
-    .work-thumb-pdf svg {
-      width: 48px;
-      height: 48px;
-      opacity: 0.5;
-      margin-bottom: 8px;
-    }
-    .work-thumb-pdf span {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-    }
-    .work-info {
-      padding: 18px 20px;
-    }
-    .work-title {
-      font-size: 0.95rem;
-      font-weight: 500;
-      margin-bottom: 4px;
-    }
-    .work-category {
-      font-size: 0.78rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
-    }
+/* ===== 実績 ===== */
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.filter button{
+  font:inherit;font-family:var(--round);font-size:.82rem;cursor:pointer;
+  border:1px solid var(--green-line);background:#fff;color:#5d5d57;
+  padding:7px 16px;border-radius:999px;
+}
+.filter button:hover{border-color:var(--green);color:var(--green-deep);}
+.filter button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;}
+.works{column-count:3;column-gap:18px;}
+@media(max-width:900px){.works{column-count:2;}}
+@media(max-width:560px){.works{column-count:1;}}
+.work{
+  break-inside:avoid;margin-bottom:18px;border:1px solid var(--green-line);
+  border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in;display:block;
+  text-decoration:none;color:inherit;
+}
+.work:hover{border-color:var(--green);box-shadow:0 3px 14px rgba(95,148,55,.13);}
+/* 画像は切り抜かず、元の比率のまま全体を見せる */
+.work img{width:100%;height:auto;}
+.work .cap{padding:11px 13px 13px;}
+.work .cap b{display:block;font-family:var(--round);font-weight:500;font-size:.9rem;line-height:1.5;}
+.work .cap span{display:block;font-size:.72rem;color:var(--green-deep);margin-top:3px;letter-spacing:.06em;}
+.works-note{margin-top:20px;font-size:.8rem;color:var(--muted);}
 
-    /* カテゴリフィルター */
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 36px;
-    }
-    .filter-btn {
-      padding: 7px 20px;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      background: var(--white);
-      cursor: pointer;
-      font-size: 0.82rem;
-      letter-spacing: 0.05em;
-      transition: all 0.2s;
-      font-family: inherit;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--primary);
-      color: var(--white);
-      border-color: var(--primary);
-    }
+/* ===== 料金 ===== */
+#pricing{background:var(--green-pale);}
+.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+.price{background:#fff;border-radius:12px;padding:18px 18px 20px;border:1px solid var(--green-line);}
+.price b{display:block;font-family:var(--round);font-weight:700;font-size:.94rem;margin-bottom:8px;}
+.price .v{font-family:var(--round);font-size:1.3rem;font-weight:700;color:var(--green-deep);line-height:1.3;}
+.price .v small{font-size:.68rem;color:var(--muted);font-weight:400;}
+.price p{font-size:.74rem;color:#6b6b64;line-height:1.75;margin-top:8px;}
+.price-note{margin-top:18px;font-size:.8rem;color:#6b6b64;line-height:1.9;}
 
-    /* コンタクト */
-    #contact {
-      background: var(--primary);
-      color: var(--white);
-      max-width: 100%;
-      padding: 0;
-    }
-    #contact .inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 24px;
-      text-align: center;
-    }
-    #contact .section-title { color: var(--accent); }
-    #contact .section-subtitle { color: var(--white); border-color: #444; }
-    #contact p { color: #aaa; font-size: 0.9rem; margin-bottom: 8px; }
+/* ===== 流れ ===== */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+.fl{text-align:center;}
+.fl i{
+  display:inline-flex;width:42px;height:42px;border-radius:50%;background:var(--green);
+  color:#fff;align-items:center;justify-content:center;font-family:var(--round);
+  font-size:1.0rem;font-weight:700;font-style:normal;margin-bottom:10px;
+}
+.fl b{display:block;font-family:var(--round);font-size:.92rem;margin-bottom:4px;}
+.fl span{display:block;font-size:.76rem;color:var(--muted);line-height:1.7;}
 
-    /* フッター */
-    footer {
-      text-align: center;
-      padding: 24px;
-      font-size: 0.78rem;
-      color: var(--gray);
-      background: var(--white);
-      border-top: 1px solid var(--border);
-    }
-    .footer-sns {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 12px;
-    }
-    .footer-sns a {
-      color: var(--gray);
-      text-decoration: none;
-      font-size: 0.82rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
-    }
-    .footer-sns a:hover { color: var(--accent); }
+/* ===== 大切にしていること ===== */
+#values{background:var(--cream);}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.val{background:var(--yellow);border-radius:10px;padding:16px 18px;}
+.val b{display:block;font-family:var(--round);font-weight:700;font-size:.98rem;margin-bottom:6px;}
+.val p{font-size:.82rem;line-height:1.85;color:#5c5444;}
+.values-note{
+  margin-top:24px;background:#fff;border:1px dashed var(--green);border-radius:10px;
+  padding:16px 20px;font-size:.9rem;line-height:1.9;
+}
 
-    /* SNSヘッダー内 */
-    .header-sns {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 16px;
-    }
-    .header-sns a {
-      color: #888;
-      text-decoration: none;
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      transition: color 0.2s;
-    }
-    .header-sns a:hover { color: var(--accent); }
+/* ===== お問い合わせ ===== */
+#contact{padding-bottom:0;}
+.ct-bar{
+  background:var(--brown);color:#fff;text-align:center;font-family:var(--round);
+  font-weight:500;letter-spacing:.14em;padding:9px 16px;border-radius:999px;
+  font-size:1.0rem;margin-bottom:28px;
+}
+.ct-grid{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;}
+.ct-rows{display:flex;flex-direction:column;gap:12px;}
+.ct-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+.ct-key{
+  flex:0 0 58px;text-align:center;border:1px solid var(--ink);border-radius:4px;
+  font-size:.68rem;letter-spacing:.1em;padding:2px 0;
+}
+.ct-val{font-family:var(--round);font-size:clamp(.92rem,3vw,1.18rem);word-break:break-all;}
+.ct-val a{text-decoration:none;}
+.ct-val a:hover{color:var(--green-deep);}
+.ct-qr{display:flex;gap:16px;}
+.ct-qr div{text-align:center;}
+.ct-qr img{width:96px;height:96px;border:1px solid var(--green-line);padding:5px;border-radius:8px;background:#fff;}
+.ct-qr span{display:block;font-size:.7rem;color:var(--muted);margin-top:5px;}
+.ct-note{margin-top:24px;font-size:.86rem;line-height:1.9;color:#5c5c56;}
 
-    /* ─── 制作の流れ ─── */
-    #process {
-      background: var(--white);
-      max-width: 100%;
-      padding: 0;
-    }
-    #process .inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      margin-top: 40px;
-      position: relative;
-    }
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 28px;
-      left: calc(12.5% + 16px);
-      right: calc(12.5% + 16px);
-      height: 2px;
-      background: var(--border);
-    }
-    .process-step {
-      text-align: center;
-      padding: 0 12px;
-      position: relative;
-    }
-    .process-num {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 300;
-      margin: 0 auto 16px;
-      position: relative;
-      z-index: 1;
-    }
-    .process-step.accent .process-num { background: var(--accent); }
-    .process-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      color: var(--primary);
-    }
-    .process-desc {
-      font-size: 0.78rem;
-      color: #666;
-      line-height: 1.6;
-    }
-    .process-period {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 0.72rem;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      border-radius: 10px;
-      padding: 2px 10px;
-    }
-    .process-note {
-      margin-top: 28px;
-      padding: 16px 24px;
-      background: var(--light);
-      border-radius: 8px;
-      font-size: 0.82rem;
-      color: #666;
-      line-height: 1.7;
-    }
+footer{margin-top:44px;}
+footer .forest img{width:100%;height:clamp(52px,9vw,96px);object-fit:cover;object-position:center bottom;}
+.foot-in{
+  background:var(--green-deep);color:#e8f1dc;padding:16px 0;
+  font-size:.74rem;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+}
 
-    /* ─── 料金目安 ─── */
-    #pricing {
-      max-width: 100%;
-      padding: 0;
-    }
-    #pricing .inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-top: 40px;
-    }
-    .pricing-card {
-      background: var(--white);
-      border-radius: 10px;
-      padding: 24px;
-      border: 1px solid var(--border);
-      transition: box-shadow 0.2s;
-    }
-    .pricing-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .pricing-icon { font-size: 1.6rem; margin-bottom: 10px; }
-    .pricing-name {
-      font-size: 0.92rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--primary);
-    }
-    .pricing-price {
-      font-size: 1.2rem;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    .pricing-price span { font-size: 0.75rem; color: #888; }
-    .pricing-badge {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      background: var(--accent);
-      color: var(--white);
-      padding: 2px 7px;
-      border-radius: 3px;
-      margin-left: 6px;
-      vertical-align: 2px;
-    }
-    .pricing-detail {
-      font-size: 0.75rem;
-      color: #777;
-      line-height: 1.7;
-      border-top: 1px solid var(--border);
-      padding-top: 10px;
-      margin-top: 10px;
-    }
-    .pricing-note {
-      grid-column: 1 / -1;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #888;
-      padding: 12px;
-      background: var(--white);
-      border-radius: 8px;
-      border: 1px dashed var(--border);
-    }
+/* ===== ライトボックス ===== */
+#lb{
+  position:fixed;inset:0;background:rgba(28,32,24,.93);display:none;z-index:200;
+  align-items:center;justify-content:center;padding:24px;
+}
+#lb.on{display:flex;}
+#lb img{max-width:100%;max-height:92vh;width:auto;height:auto;border-radius:4px;}
+#lb button{
+  position:absolute;top:14px;right:20px;background:none;border:none;color:#fff;
+  font-size:2rem;line-height:1;cursor:pointer;opacity:.85;
+}
 
-    /* ─── お問い合わせ（更新）─── */
-    .contact-btn {
-      display: inline-block;
-      margin-top: 28px;
-      background: var(--accent);
-      color: var(--white);
-      text-decoration: none;
-      padding: 14px 48px;
-      border-radius: 30px;
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .contact-btn:hover { opacity: 0.85; transform: translateY(-2px); }
-    .contact-sub {
-      margin-top: 20px;
-      font-size: 0.8rem;
-      color: #666;
-    }
-
-    /* ─── Lightbox ─── */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.88);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
-    }
-    #lightbox.open { display: flex; }
-    #lightbox-img {
-      max-width: 92vw;
-      max-height: 92vh;
-      object-fit: contain;
-      border-radius: 4px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
-      cursor: default;
-    }
-    #lightbox-close {
-      position: fixed;
-      top: 20px;
-      right: 28px;
-      color: var(--white);
-      font-size: 2rem;
-      cursor: pointer;
-      line-height: 1;
-      opacity: 0.8;
-      background: none;
-      border: none;
-      transition: opacity 0.2s;
-    }
-    #lightbox-close:hover { opacity: 1; }
-    .work-card { cursor: zoom-in; }
-
-    /* レスポンシブ */
-    @media (max-width: 640px) {
-      header .logo { font-size: 1.8rem; }
-      #about .inner { grid-template-columns: 1fr; gap: 32px; }
-      nav { gap: 20px; }
-      .process-steps { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-      .process-steps::before { display: none; }
-      .pricing-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+@media(max-width:900px){
+  .svc-grid{grid-template-columns:repeat(3,1fr);}
+  .price-grid{grid-template-columns:repeat(2,1fr);}
+  .flow{grid-template-columns:repeat(3,1fr);gap:20px 10px;}
+  .values{grid-template-columns:1fr;}
+  .ct-grid{grid-template-columns:1fr;}
+}
+@media(max-width:560px){
+  section{padding:44px 0;}
+  .svc-grid{grid-template-columns:repeat(2,1fr);}
+  .needs{grid-template-columns:1fr;}
+  .price-grid{grid-template-columns:1fr;}
+  .flow{grid-template-columns:repeat(2,1fr);}
+  .head-logo img{height:30px;}
+  header nav a{padding:6px 10px;font-size:.78rem;}
+  .hero-in{padding:34px 0 30px;}
+}
+</style>
 </head>
 <body>
 
 <header>
-  <div class="logo">art-at-coco</div>
-  <div class="tagline">グラフィックデザイン &nbsp;|&nbsp; 印刷物制作</div>
+  <div class="head-in">
+    <a class="head-logo" href="#top"><img src="assets/logo.png" alt="art@coco デザインアトリエ アートアットココ"></a>
+    <nav>
+      <a href="#services">できること</a>
+      <a href="#works">制作実績</a>
+      <a href="#pricing">料金</a>
+      <a href="#process">流れ</a>
+      <a class="cta" href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
 </header>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#works">Works</a>
-  <a href="#process">流れ・料金</a>
-  <a href="#contact">依頼する</a>
-</nav>
-
-<!-- About -->
-<div id="about">
-  <div class="inner">
-    <div class="about-text">
-      <div class="section-title">About</div>
-      <div class="section-subtitle">デザインで、想いを形に。</div>
-      <p>宮崎県北を中心に、チラシ・ショップカード・ロゴ・ラベル・メニューなど、地域の事業者さまの印刷物制作をお手伝いしています。</p>
-      <p>「こんなものが作りたい」というご要望から、印刷の手配・納品まで丁寧に対応します。</p>
-      <div class="services">
-        <span class="service-tag">チラシ・フライヤー</span>
-        <span class="service-tag">ショップカード</span>
-        <span class="service-tag">ロゴデザイン</span>
-        <span class="service-tag">ラベル</span>
-        <span class="service-tag">パンフレット</span>
-        <span class="service-tag">POP</span>
-        <span class="service-tag">メニュー表</span>
-        <span class="service-tag">プレゼントカード</span>
-      </div>
+<!-- ===== ヒーロー ===== -->
+<div class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-in">
+    <div class="catch">
+      <span><i>想いをカタチに、</i></span>
+      <span><i>あなたの「伝えたい」を</i></span>
+      <span><i>デザインします。</i></span>
     </div>
-    <div class="about-image">
-      <!-- プロフィール写真があれば差し替えてください -->
-      <div style="width:100%;aspect-ratio:1;background:linear-gradient(135deg,#e8ddd2,#c8945a22);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#c8945a;font-size:1rem;letter-spacing:0.2em;">art-at-coco</div>
-    </div>
-  </div>
-</div>
-
-<!-- Works -->
-<section id="works">
-  <div class="section-title">Works</div>
-  <div class="section-subtitle">制作実績</div>
-
-  <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterWorks('all', this)">All</button>
-    <button class="filter-btn" onclick="filterWorks('flyer', this)">チラシ</button>
-    <button class="filter-btn" onclick="filterWorks('card', this)">カード・ショップカード</button>
-    <button class="filter-btn" onclick="filterWorks('label', this)">ラベル</button>
-    <button class="filter-btn" onclick="filterWorks('menu', this)">メニュー・POP</button>
-    <button class="filter-btn" onclick="filterWorks('pamphlet', this)">パンフレット</button>
-  </div>
-
-  <div class="works-grid" id="works-grid">
-
-    <a class="work-card" data-cat="flyer" href="実績_webp/202306_repair_チラシ_ol.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/202306_repair_チラシ_ol.webp" alt="修繕サービス チラシ" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">修繕サービス チラシ</div>
-        <div class="work-category">チラシ・フライヤー</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="flyer" href="実績_webp/202402_新地_産後ケア_チラシR2.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/202402_新地_産後ケア_チラシR2.webp" alt="産後ケアサービス チラシ" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">産後ケアサービス チラシ</div>
-        <div class="work-category">チラシ・フライヤー</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="flyer" href="実績_webp/チラシ案_re03.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/チラシ案_re03.webp" alt="チラシデザイン案" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">チラシデザイン</div>
-        <div class="work-category">チラシ・フライヤー</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="card" href="実績_webp/KNOT.様_logo.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/KNOT.様_logo.webp" alt="KNOT. ロゴデザイン" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">KNOT. ロゴデザイン</div>
-        <div class="work-category">ロゴ</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="card" href="実績_webp/KNOT.様_ショップカード03.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/KNOT.様_ショップカード03.webp" alt="KNOT. ショップカード" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">KNOT. ショップカード</div>
-        <div class="work-category">ショップカード</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="card" href="実績_webp/Terrace j_プレゼントカード.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/Terrace j_プレゼントカード.webp" alt="Terrace j プレゼントカード" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">Terrace j プレゼントカード</div>
-        <div class="work-category">カード</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="pamphlet" href="実績_webp/Jインソール_表面.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/Jインソール_表面.webp" alt="J インソール パンフレット 表面" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">J インソール パンフレット（表面）</div>
-        <div class="work-category">パンフレット</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="pamphlet" href="実績_webp/Jインソール_中面_新.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/Jインソール_中面_新.webp" alt="J インソール パンフレット 中面" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">J インソール パンフレット（中面）</div>
-        <div class="work-category">パンフレット</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="pamphlet" href="実績_webp/あしなか_中面02.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/あしなか_中面02.webp" alt="あしなか パンフレット" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">あしなか パンフレット</div>
-        <div class="work-category">パンフレット</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="menu" href="実績_webp/メニューA_0418.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/メニューA_0418.webp" alt="メニュー" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">メニュー表</div>
-        <div class="work-category">メニュー</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="menu" href="実績_webp/POP_多肉植物.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/POP_多肉植物.webp" alt="多肉植物 POP" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">多肉植物 POP</div>
-        <div class="work-category">POP</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="label" href="実績_webp/ラベル_メダカの卵.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/ラベル_メダカの卵.webp" alt="メダカの卵 ラベル" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">メダカの卵 ラベル</div>
-        <div class="work-category">ラベル</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="label" href="実績_webp/ラベル_メダカの産卵床.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/ラベル_メダカの産卵床.webp" alt="メダカの産卵床 ラベル" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">メダカの産卵床 ラベル</div>
-        <div class="work-category">ラベル</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="label" href="実績_webp/ラベル_食用ひまわり.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/ラベル_食用ひまわり.webp" alt="食用ひまわり ラベル" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">食用ひまわり ラベル</div>
-        <div class="work-category">ラベル</div>
-      </div>
-    </a>
-
-    <a class="work-card" data-cat="flyer" href="実績_webp/依頼01_納品.webp" target="_blank">
-      <img class="work-thumb" src="実績_webp/依頼01_納品.webp" alt="納品デザイン" loading="lazy">
-      <div class="work-info">
-        <div class="work-title">デザイン納品作品</div>
-        <div class="work-category">チラシ・フライヤー</div>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- 制作の流れ -->
-<div id="process">
-  <div class="inner">
-    <div class="section-title">Process</div>
-    <div class="section-subtitle">制作の流れ</div>
-
-    <div class="process-steps">
-      <div class="process-step accent">
-        <div class="process-num">1</div>
-        <div class="process-title">ご依頼・ヒアリング</div>
-        <div class="process-desc">フォームよりご連絡ください。用途・イメージ・締め切りなどをお聞きします。</div>
-        <span class="process-period">1〜2日</span>
-      </div>
-      <div class="process-step">
-        <div class="process-num">2</div>
-        <div class="process-title">ラフ案・お見積もり</div>
-        <div class="process-desc">方向性のラフ案と概算お見積もりをご提示。方向性が合えば正式にご依頼へ。</div>
-        <span class="process-period">2〜3日</span>
-      </div>
-      <div class="process-step">
-        <div class="process-num">3</div>
-        <div class="process-title">デザイン制作・修正</div>
-        <div class="process-desc">デザインデータを制作。2回まで修正対応します（大幅変更は別途ご相談）。</div>
-        <span class="process-period">5〜7日</span>
-      </div>
-      <div class="process-step accent">
-        <div class="process-num">4</div>
-        <div class="process-title">印刷・納品</div>
-        <div class="process-desc">印刷の手配からお届けまで承ります。データのみ（PDF/ai）でのご納品も可能です。</div>
-        <span class="process-period">1〜2日</span>
-      </div>
-    </div>
-
-    <div class="process-note">
-      📌 お急ぎの場合はご相談ください。内容によっては特急対応も可能です。<br>
-      修正回数・ページ数・オプション等により納期・金額は変動します。
-    </div>
-  </div>
-</div>
-
-<!-- 料金目安 -->
-<section id="pricing">
-  <div class="inner">
-    <div class="section-title">Pricing</div>
-    <div class="section-subtitle">料金目安</div>
-
-    <div class="pricing-grid">
-      <div class="pricing-card">
-        <div class="pricing-icon">📄</div>
-        <div class="pricing-name">チラシ・フライヤー</div>
-        <div class="pricing-price">¥20,000 <span>〜（税込）</span></div>
-        <div class="pricing-detail">
-          A4・A5判など<br>
-          両面は¥32,000〜<br>
-          修正3回まで含む
-        </div>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-icon">🪪</div>
-        <div class="pricing-name">ショップカード・名刺</div>
-        <div class="pricing-price">¥12,000 <span>〜（税込）</span></div>
-        <div class="pricing-detail">
-          標準サイズ・両面対応<br>
-          ロゴあり・なしどちらも可<br>
-          修正3回まで含む
-        </div>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-icon">✏️</div>
-        <div class="pricing-name">ロゴデザイン</div>
-        <div class="pricing-price">¥50,000 <span>〜（税込）</span></div>
-        <div class="pricing-detail">
-          3案ご提案<br>
-          ai・PNG・PDFで納品<br>
-          修正3回まで含む
-        </div>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-icon">🏷️</div>
-        <div class="pricing-name">ラベルデザイン</div>
-        <div class="pricing-price">¥20,000 <span>〜（税込）</span></div>
-        <div class="pricing-detail">
-          シール・パッケージ向け<br>
-          サイズ・形状は要相談<br>
-          修正3回まで含む
-        </div>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-icon">📖</div>
-        <div class="pricing-name">パンフレット・冊子</div>
-        <div class="pricing-price">¥45,000 <span>〜（税込）</span></div>
-        <div class="pricing-detail">
-          三つ折りリーフレット<br>
-          中綴じは1ページ¥10,000〜<br>
-          修正3回まで含む
-        </div>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-icon">🌿</div>
-        <div class="pricing-name">POP・メニュー表</div>
-        <div class="pricing-price">¥15,000 <span>〜（税込）</span></div>
-        <div class="pricing-detail">
-          メニュー表 A4片面<br>
-          POP・プライスカードは¥6,000〜<br>
-          修正3回まで含む
-        </div>
-      </div>
-      <div class="pricing-card">
-        <div class="pricing-icon">🖨️</div>
-        <div class="pricing-name">印刷の手配</div>
-        <div class="pricing-price">実費＋手数料 <span>（500部まで¥3,000〜）</span></div>
-        <div class="pricing-detail">
-          印刷代は実費でご請求<br>
-          手配手数料は部数に応じて<br>
-          仕上がりまでお届け
-        </div>
-      </div>
-      <div class="pricing-card" style="grid-column: span 2;">
-        <div class="pricing-icon">💬</div>
-        <div class="pricing-name">その他・ご相談ください</div>
-        <div class="pricing-price">お見積もり無料</div>
-        <div class="pricing-detail">
-          上記にない印刷物も<br>
-          「作れますか？」のひとことから<br>
-          まずはお気軽にどうぞ
-        </div>
-      </div>
-      <div class="pricing-note">
-        ※ 上記はデザイン料の目安（税込）です。修正は3回まで込み、原稿・写真はご支給いただく前提です。<br>
-        ※ 印刷代は実費、手配手数料は部数に応じて別途申し受けます。<br>
-        <strong>お見積もりは無料です。</strong>まずはお気軽にご相談ください。
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Contact -->
-<div id="contact">
-  <div class="inner">
-    <div class="section-title">Contact</div>
-    <div class="section-subtitle">依頼・お問い合わせ</div>
-    <p>チラシ・ショップカード・ロゴなどのご依頼・お見積もり依頼はこちらから。<br>お気軽にどうぞ！</p>
-
-    <a class="contact-btn"
-       href="https://forms.gle/TR6pvQFX1u1kKq4c8"
-       target="_blank" rel="noopener">
-      📝 依頼・お問い合わせフォームへ
-    </a>
-
-    <p class="contact-sub">
-      フォームが開かない場合はメールでもどうぞ：<br>
-      <a href="mailto:design.atelier.art.at.coco@gmail.com" style="color:#aaa;">design.atelier.art.at.coco@gmail.com</a>
+    <div class="hero-logo"><img src="assets/logo.png" alt="art@coco（アートアットココ）"></div>
+    <p class="hero-note">
+      <b>90％以上が森林の</b><br>
+      自然豊かな小さな町から<br>
+      デザインをお届けします
     </p>
   </div>
 </div>
+<div class="forest-band"><img src="assets/forest-band.jpg" alt=""></div>
+
+<!-- ===== できること ===== -->
+<section id="services">
+  <div class="inner">
+    <div class="head-row">
+      <span class="tag-head">できること</span>
+      <span class="head-lead">デザインから印刷まで、まるごとおまかせください。</span>
+    </div>
+
+    <div class="svc-grid">
+      <div class="svc"><img src="assets/icon01.png" alt=""><b>名刺<br>ショップカード</b></div>
+      <div class="svc"><img src="assets/icon02.png" alt=""><b>チラシ<br>フライヤー</b></div>
+      <div class="svc"><img src="assets/icon03.png" alt=""><b>ポスター</b></div>
+      <div class="svc"><img src="assets/icon04.png" alt=""><b>リーフレット</b></div>
+      <div class="svc"><img src="assets/icon05.png" alt=""><b>パンフレット</b></div>
+      <div class="svc"><img src="assets/icon06.png" alt=""><b>ロゴ</b></div>
+      <div class="svc"><img src="assets/icon07.png" alt=""><b>バナー</b></div>
+      <div class="svc"><img src="assets/icon08.png" alt=""><b>パッケージ</b></div>
+      <div class="svc"><img src="assets/icon09.png" alt=""><b>オリジナルシール</b></div>
+      <div class="svc"><img src="assets/icon10.png" alt=""><b>各種印刷</b></div>
+    </div>
+
+    <div class="needs">
+      <div class="need">お店や商品の魅力をもっと伝えたい</div>
+      <div class="need">ロゴやイメージを新しくしたい</div>
+      <div class="need">イベントやキャンペーンを告知したい</div>
+      <div class="need">自分たちらしいデザインで印刷をお願いしたい</div>
+    </div>
+    <p class="needs-note">小さなことでも、お気軽にご相談ください。</p>
+  </div>
+</section>
+
+<!-- ===== 制作実績 ===== -->
+<section id="works">
+  <div class="inner">
+    <div class="head-row">
+      <span class="tag-head">制作実績</span>
+      <span class="head-lead">これまでにお手伝いした印刷物です。画像を押すと大きく見られます。</span>
+    </div>
+
+    <div class="filter" id="filter">
+      <button aria-pressed="true" data-cat="all">すべて</button>
+      <button aria-pressed="false" data-cat="flyer">チラシ</button>
+      <button aria-pressed="false" data-cat="pamphlet">パンフレット・リーフレット</button>
+      <button aria-pressed="false" data-cat="label">ラベル・シール</button>
+      <button aria-pressed="false" data-cat="menu">メニュー・POP</button>
+      <button aria-pressed="false" data-cat="card">ロゴ・カード</button>
+    </div>
+
+    <div class="works" id="works-grid">
+
+      <a class="work" data-cat="flyer" href="実績_webp/パパイヤカフェ整体.webp">
+        <img src="実績_webp/パパイヤカフェ整体.webp" alt="整体サロンのチラシ（両面）" loading="lazy">
+        <div class="cap"><b>整体サロン チラシ</b><span>A4／両面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/Jスタイル.webp">
+        <img src="実績_webp/Jスタイル.webp" alt="フィットネスジムのチラシ（両面）" loading="lazy">
+        <div class="cap"><b>フィットネスジム チラシ</b><span>A4／両面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="menu" href="実績_webp/Mainos_Menu.webp">
+        <img src="実績_webp/Mainos_Menu.webp" alt="サロンのメニュー表" loading="lazy">
+        <div class="cap"><b>サロン メニュー表</b><span>A4／片面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/Jパーソナル学校.webp">
+        <img src="実績_webp/Jパーソナル学校.webp" alt="スクール受講生募集のチラシ（両面）" loading="lazy">
+        <div class="cap"><b>スクール募集 チラシ</b><span>A4／両面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/BALANCE.webp">
+        <img src="実績_webp/BALANCE.webp" alt="コンディショニングサロンのチラシ（両面）" loading="lazy">
+        <div class="cap"><b>コンディショニングサロン チラシ</b><span>A4／両面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/家系図チラシ.webp">
+        <img src="実績_webp/家系図チラシ.webp" alt="家系図制作サービスの案内チラシ" loading="lazy">
+        <div class="cap"><b>家系図制作サービス チラシ</b><span>A4／両面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/チラシ.webp">
+        <img src="実績_webp/チラシ.webp" alt="健康セミナーの告知チラシ" loading="lazy">
+        <div class="cap"><b>健康セミナー告知 チラシ</b><span>A4／片面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/チラシ案_re03.webp">
+        <img src="実績_webp/チラシ案_re03.webp" alt="コンディショニング店のプレオープン告知チラシ" loading="lazy">
+        <div class="cap"><b>プレオープン告知 チラシ</b><span>A4／片面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="flyer" href="実績_webp/202306_repair_チラシ_ol.webp">
+        <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="パーソナルジムの新規オープンチラシ" loading="lazy">
+        <div class="cap"><b>パーソナルジム 新規オープン チラシ</b><span>A4／片面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="pamphlet" href="実績_webp/Jインソール_表面.webp">
+        <img src="実績_webp/Jインソール_表面.webp" alt="商品パンフレット 表面" loading="lazy">
+        <div class="cap"><b>商品パンフレット（表面）</b><span>A4三つ折り</span></div>
+      </a>
+
+      <a class="work" data-cat="pamphlet" href="実績_webp/Jインソール_中面_新.webp">
+        <img src="実績_webp/Jインソール_中面_新.webp" alt="商品パンフレット 中面" loading="lazy">
+        <div class="cap"><b>商品パンフレット（中面）</b><span>A4三つ折り</span></div>
+      </a>
+
+      <a class="work" data-cat="pamphlet" href="実績_webp/あしなか_中面02.webp">
+        <img src="実績_webp/あしなか_中面02.webp" alt="健康雑貨のパンフレット 中面" loading="lazy">
+        <div class="cap"><b>健康雑貨 パンフレット（中面）</b><span>A4三つ折り</span></div>
+      </a>
+
+      <a class="work" data-cat="label" href="実績_webp/ラベル_食用ひまわり.webp">
+        <img src="実績_webp/ラベル_食用ひまわり.webp" alt="食用ひまわりの商品ラベル" loading="lazy">
+        <div class="cap"><b>食用ひまわり ラベル</b><span>商品ラベル</span></div>
+      </a>
+
+      <a class="work" data-cat="label" href="実績_webp/ラベル_メダカの卵.webp">
+        <img src="実績_webp/ラベル_メダカの卵.webp" alt="メダカの卵の商品ラベル" loading="lazy">
+        <div class="cap"><b>メダカの卵 ラベル</b><span>商品ラベル</span></div>
+      </a>
+
+      <a class="work" data-cat="label" href="実績_webp/ラベル_メダカの産卵床.webp">
+        <img src="実績_webp/ラベル_メダカの産卵床.webp" alt="メダカの産卵床の商品ラベル" loading="lazy">
+        <div class="cap"><b>メダカの産卵床 ラベル</b><span>商品ラベル</span></div>
+      </a>
+
+      <a class="work" data-cat="menu" href="実績_webp/メニューA_0418.webp">
+        <img src="実績_webp/メニューA_0418.webp" alt="サロンのメニュー表" loading="lazy">
+        <div class="cap"><b>メニュー表</b><span>A4／片面フルカラー</span></div>
+      </a>
+
+      <a class="work" data-cat="menu" href="実績_webp/POP_多肉植物.webp">
+        <img src="実績_webp/POP_多肉植物.webp" alt="多肉植物の店頭POP" loading="lazy">
+        <div class="cap"><b>多肉植物 店頭POP</b><span>POP</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/KNOT.様_logo.webp">
+        <img src="実績_webp/KNOT.様_logo.webp" alt="サロンのロゴデザイン" loading="lazy">
+        <div class="cap"><b>サロン ロゴデザイン</b><span>ロゴ</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/KNOT.様_ショップカード03.webp">
+        <img src="実績_webp/KNOT.様_ショップカード03.webp" alt="サロンのショップカード" loading="lazy">
+        <div class="cap"><b>ショップカード</b><span>ショップカード</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/Terrace j_プレゼントカード.webp">
+        <img src="実績_webp/Terrace j_プレゼントカード.webp" alt="プレゼントカード" loading="lazy">
+        <div class="cap"><b>プレゼントカード</b><span>カード</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/依頼01_納品.webp">
+        <img src="実績_webp/依頼01_納品.webp" alt="SNS用アイコンイラスト" loading="lazy">
+        <div class="cap"><b>アイコンイラスト</b><span>SNS・名刺用</span></div>
+      </a>
+
+    </div>
+    <p class="works-note">※ 掲載しているデザインの著作権は art@coco に帰属します。実物の一部は、個人情報にあたる部分を伏せています。</p>
+  </div>
+</section>
+
+<!-- ===== 料金 ===== -->
+<section id="pricing">
+  <div class="inner">
+    <div class="head-row">
+      <span class="tag-head">料金のめやす</span>
+      <span class="head-lead">内容を伺ったうえで、必ず事前にお見積もりをお出しします。無料です。</span>
+    </div>
+
+    <div class="price-grid">
+      <div class="price"><b>チラシ・フライヤー</b><div class="v">¥20,000<small>〜（税込）</small></div><p>A4片面。両面は¥32,000〜</p></div>
+      <div class="price"><b>ショップカード・名刺</b><div class="v">¥12,000<small>〜（税込）</small></div><p>両面。ロゴをお持ちの場合</p></div>
+      <div class="price"><b>ロゴデザイン</b><div class="v">¥50,000<small>〜（税込）</small></div><p>ラフ3案・データ一式でお渡し</p></div>
+      <div class="price"><b>ラベル・シール</b><div class="v">¥20,000<small>〜（税込）</small></div><p>1種類から。シリーズ展開も可</p></div>
+      <div class="price"><b>パンフレット・冊子</b><div class="v">¥45,000<small>〜（税込）</small></div><p>A4三つ折り両面。中綴じは1ページ¥10,000〜</p></div>
+      <div class="price"><b>POP・メニュー表</b><div class="v">¥15,000<small>〜（税込）</small></div><p>A4片面。POPは¥6,000〜</p></div>
+      <div class="price"><b>印刷の手配</b><div class="v">実費＋¥3,000<small>〜（500部まで）</small></div><p>紙と部数のご相談から納品まで</p></div>
+      <div class="price"><b>ポスター・バナー・その他</b><div class="v" style="font-size:1.0rem;">ご相談ください</div><p>のぼり・看板・封筒・パッケージなど</p></div>
+    </div>
+
+    <div class="price-note">
+      ※ 修正は3回まで料金に含みます。4回目以降は1回¥3,000にて承ります。<br>
+      ※ 写真撮影、文章のライティング、イラストの新規描き起こしは別途お見積もりとなります。<br>
+      ※ お支払いは納品後の銀行振込です。見積書・請求書を発行します。小部数・1種類のみのご依頼も歓迎します。
+    </div>
+  </div>
+</section>
+
+<!-- ===== 流れ ===== -->
+<section id="process">
+  <div class="inner">
+    <div class="head-row">
+      <span class="tag-head">ご依頼の流れ</span>
+      <span class="head-lead">ご相談から納品まで、おおよそ2〜3週間が目安です。</span>
+    </div>
+    <div class="flow">
+      <div class="fl"><i>1</i><b>ご相談</b><span>お見積もり無料<br>当日〜3日</span></div>
+      <div class="fl"><i>2</i><b>ラフ案</b><span>方向を決める<br>3〜7日</span></div>
+      <div class="fl"><i>3</i><b>制作・修正</b><span>3回まで込み<br>7〜14日</span></div>
+      <div class="fl"><i>4</i><b>印刷の手配</b><span>紙と部数も相談<br>5〜10日</span></div>
+      <div class="fl"><i>5</i><b>納品</b><span>お店までお届け<br>データのみも可</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 大切にしていること ===== -->
+<section id="values">
+  <div class="inner">
+    <div class="head-row">
+      <span class="tag-head">大切にしていること</span>
+    </div>
+    <div class="values">
+      <div class="val"><b>想いに寄り添う、丁寧なヒアリング</b><p>専門用語は使いません。「なんとなくこんな感じ」からご一緒に考えます。まずは世間話からで大丈夫です。</p></div>
+      <div class="val"><b>伝えたいことが、伝わるデザイン</b><p>きれいに作るだけでは終わりません。誰に何を決めてほしいのか、というところからお話を始めます。</p></div>
+      <div class="val"><b>デザインから印刷まで、スムーズに対応</b><p>紙や部数のご相談、印刷会社への入稿、お店へのお届けまで。「入稿データってどうすれば？」で止まりません。</p></div>
+    </div>
+    <p class="values-note">
+      打ち合わせやデータのやり取りは <b>LINEまたはメールでOK！</b><br>
+      お忙しい方も、気軽にご相談いただけます。宮崎県北（延岡市・日向市・門川町・高千穂町ほか）なら、直接お伺いすることもできます。
+    </p>
+  </div>
+</section>
+
+<!-- ===== お問い合わせ ===== -->
+<section id="contact">
+  <div class="inner">
+    <div class="ct-bar">まずはお気軽にお問い合わせください</div>
+    <div class="ct-grid">
+      <div class="ct-rows">
+        <div class="ct-row">
+          <span class="ct-key">MAIL</span>
+          <span class="ct-val"><a href="mailto:design.atelier.art.at.coco@gmail.com">design.atelier.art.at.coco@gmail.com</a></span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-key">TEL</span>
+          <span class="ct-val"><a href="tel:08052893555">080-5289-3555</a></span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-key">FORM</span>
+          <span class="ct-val"><a href="https://forms.gle/TR6pvQFX1u1kKq4c8" target="_blank" rel="noopener">かんたん依頼フォーム</a></span>
+        </div>
+        <div class="ct-row">
+          <span class="ct-key">AREA</span>
+          <span class="ct-val" style="font-size:.95rem;">宮崎県北ほか／全国オンライン対応</span>
+        </div>
+      </div>
+      <div class="ct-qr">
+        <div><img src="qr-site.png" alt="このサイトのQRコード"><span>このサイト</span></div>
+        <div><img src="qr-form.png" alt="依頼フォームのQRコード"><span>依頼フォーム</span></div>
+      </div>
+    </div>
+    <p class="ct-note">
+      「これ、作れますか？」「いくらぐらいになりますか？」のひとことからで大丈夫です。<br>
+      ラベル1種類、POP1枚といった小さなご依頼も歓迎しています。
+    </p>
+  </div>
+</section>
 
 <footer>
-  &copy; 2026 art-at-coco. All rights reserved.
+  <div class="forest"><img src="assets/forest-foot.jpg" alt=""></div>
+  <div class="foot-in">
+    <div class="inner" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;width:min(1080px,100% - 40px);">
+      <span>art@coco／デザインアトリエ アートアットココ</span>
+      <span>&copy; 2026 art@coco</span>
+    </div>
+  </div>
 </footer>
 
-<!-- Lightbox -->
-<div id="lightbox" onclick="closeLightbox()">
-  <button id="lightbox-close" onclick="closeLightbox()">✕</button>
-  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
-</div>
+<div id="lb"><button type="button" aria-label="閉じる">&times;</button><img src="" alt=""></div>
 
 <script>
-  /* ── カテゴリフィルター ── */
-  function filterWorks(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.work-card').forEach(card => {
-      card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
-    });
-  }
-
-  /* ── Lightbox ── */
-  function openLightbox(src, alt) {
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    img.src = src;
-    img.alt = alt || '';
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-  // 全ワークカードにLightboxを設定
-  document.querySelectorAll('.work-card').forEach(card => {
-    const img = card.querySelector('img.work-thumb');
-    if (!img) return;
-    card.addEventListener('click', e => {
-      e.preventDefault();
-      openLightbox(img.src, img.alt);
+(function(){
+  // 絞り込み
+  var bar = document.getElementById('filter');
+  var works = Array.prototype.slice.call(document.querySelectorAll('.work'));
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn) return;
+    bar.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', String(b === btn)); });
+    var cat = btn.getAttribute('data-cat');
+    works.forEach(function(w){
+      w.hidden = !(cat === 'all' || w.getAttribute('data-cat') === cat);
     });
   });
+
+  // ライトボックス（元の比率のまま全体を表示）
+  var lb = document.getElementById('lb');
+  var lbImg = lb.querySelector('img');
+  function close(){ lb.classList.remove('on'); lbImg.src = ''; }
+  document.getElementById('works-grid').addEventListener('click', function(e){
+    var a = e.target.closest('.work');
+    if(!a) return;
+    e.preventDefault();
+    lbImg.src = a.getAttribute('href');
+    lbImg.alt = a.querySelector('.cap b').textContent;
+    lb.classList.add('on');
+  });
+  lb.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+})();
 </script>
 
 </body>
