@@ -124,18 +124,32 @@ section{padding:60px 0;}
 }
 .filter button:hover{border-color:var(--green);color:var(--green-deep);}
 .filter button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;}
-.works{column-count:3;column-gap:18px;}
-@media(max-width:900px){.works{column-count:2;}}
-@media(max-width:560px){.works{column-count:1;}}
-.work{
-  break-inside:avoid;margin-bottom:18px;border:1px solid var(--green-line);
-  border-radius:10px;overflow:hidden;background:#fff;cursor:zoom-in;display:block;
-  text-decoration:none;color:inherit;
+.works{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;
 }
+@media(max-width:560px){.works{grid-template-columns:repeat(2,1fr);gap:12px;}.works .thumb{height:210px;}}
+.work{
+  border:1px solid var(--green-line);border-radius:10px;overflow:hidden;background:#fff;
+  cursor:zoom-in;display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  position:relative;
+}
+.work[hidden]{display:none;}
 .work:hover{border-color:var(--green);box-shadow:0 3px 14px rgba(95,148,55,.13);}
-/* 画像は切り抜かず、元の比率のまま全体を見せる */
-.work img{width:100%;height:auto;}
-.work .cap{padding:11px 13px 13px;}
+/* どの作品も同じ大きさの枠に収める。切り抜かずに全体を見せる */
+.thumb{
+  height:250px;flex-shrink:0;overflow:hidden;background:var(--green-pale);
+  display:flex;align-items:center;justify-content:center;padding:10px;
+}
+.thumb img{max-width:100%;max-height:100%;width:auto;height:auto;min-height:0;
+  object-fit:contain;box-shadow:0 1px 6px rgba(0,0,0,.14);}
+.zoom{
+  position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.88);color:var(--green-deep);font-size:.8rem;
+  display:flex;align-items:center;justify-content:center;pointer-events:none;
+  box-shadow:0 1px 4px rgba(0,0,0,.18);
+}
+.work:hover .zoom{background:var(--green);color:#fff;}
+.work .cap{padding:11px 13px 13px;flex:1;display:flex;flex-direction:column;justify-content:center;min-height:62px;}
 .work .cap b{display:block;font-family:var(--round);font-weight:500;font-size:.9rem;line-height:1.5;}
 .work .cap span{display:block;font-size:.72rem;color:var(--green-deep);margin-top:3px;letter-spacing:.06em;}
 .works-note{margin-top:20px;font-size:.8rem;color:var(--muted);}
@@ -208,7 +222,9 @@ footer .forest img{width:100%;height:clamp(52px,9vw,96px);object-fit:cover;objec
   align-items:center;justify-content:center;padding:24px;
 }
 #lb.on{display:flex;}
-#lb img{max-width:100%;max-height:92vh;width:auto;height:auto;border-radius:4px;}
+#lb figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:12px;max-height:94vh;}
+#lb img{max-width:100%;max-height:84vh;width:auto;height:auto;border-radius:4px;background:#fff;}
+#lb figcaption{color:#e8f1dc;font-family:var(--round);font-size:.88rem;text-align:center;}
 #lb button{
   position:absolute;top:14px;right:20px;background:none;border:none;color:#fff;
   font-size:2rem;line-height:1;cursor:pointer;opacity:.85;
@@ -310,120 +326,177 @@ footer .forest img{width:100%;height:clamp(52px,9vw,96px);object-fit:cover;objec
       <button aria-pressed="true" data-cat="all">すべて</button>
       <button aria-pressed="false" data-cat="flyer">チラシ</button>
       <button aria-pressed="false" data-cat="pamphlet">パンフレット・リーフレット</button>
+      <button aria-pressed="false" data-cat="book">テキスト・冊子</button>
       <button aria-pressed="false" data-cat="label">ラベル・シール</button>
       <button aria-pressed="false" data-cat="menu">メニュー・POP</button>
-      <button aria-pressed="false" data-cat="card">ロゴ・カード</button>
+      <button aria-pressed="false" data-cat="card">ロゴ・名刺・カード</button>
+      <button aria-pressed="false" data-cat="sign">ポスター・看板・バナー</button>
     </div>
 
     <div class="works" id="works-grid">
 
       <a class="work" data-cat="flyer" href="実績_webp/パパイヤカフェ整体.webp">
-        <img src="実績_webp/パパイヤカフェ整体.webp" alt="整体サロンのチラシ（両面）" loading="lazy">
+        <div class="thumb"><img src="実績_webp/パパイヤカフェ整体.webp" alt="整体サロンのチラシ（両面）" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>整体サロン チラシ</b><span>A4／両面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/Jスタイル.webp">
-        <img src="実績_webp/Jスタイル.webp" alt="フィットネスジムのチラシ（両面）" loading="lazy">
+        <div class="thumb"><img src="実績_webp/Jスタイル.webp" alt="フィットネスジムのチラシ（両面）" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>フィットネスジム チラシ</b><span>A4／両面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="menu" href="実績_webp/Mainos_Menu.webp">
-        <img src="実績_webp/Mainos_Menu.webp" alt="サロンのメニュー表" loading="lazy">
+        <div class="thumb"><img src="実績_webp/Mainos_Menu.webp" alt="サロンのメニュー表" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>サロン メニュー表</b><span>A4／片面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/Jパーソナル学校.webp">
-        <img src="実績_webp/Jパーソナル学校.webp" alt="スクール受講生募集のチラシ（両面）" loading="lazy">
+        <div class="thumb"><img src="実績_webp/Jパーソナル学校.webp" alt="スクール受講生募集のチラシ（両面）" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>スクール募集 チラシ</b><span>A4／両面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/BALANCE.webp">
-        <img src="実績_webp/BALANCE.webp" alt="コンディショニングサロンのチラシ（両面）" loading="lazy">
+        <div class="thumb"><img src="実績_webp/BALANCE.webp" alt="コンディショニングサロンのチラシ（両面）" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>コンディショニングサロン チラシ</b><span>A4／両面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/家系図チラシ.webp">
-        <img src="実績_webp/家系図チラシ.webp" alt="家系図制作サービスの案内チラシ" loading="lazy">
+        <div class="thumb"><img src="実績_webp/家系図チラシ.webp" alt="家系図制作サービスの案内チラシ" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>家系図制作サービス チラシ</b><span>A4／両面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/チラシ.webp">
-        <img src="実績_webp/チラシ.webp" alt="健康セミナーの告知チラシ" loading="lazy">
+        <div class="thumb"><img src="実績_webp/チラシ.webp" alt="健康セミナーの告知チラシ" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>健康セミナー告知 チラシ</b><span>A4／片面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/チラシ案_re03.webp">
-        <img src="実績_webp/チラシ案_re03.webp" alt="コンディショニング店のプレオープン告知チラシ" loading="lazy">
+        <div class="thumb"><img src="実績_webp/チラシ案_re03.webp" alt="コンディショニング店のプレオープン告知チラシ" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>プレオープン告知 チラシ</b><span>A4／片面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="flyer" href="実績_webp/202306_repair_チラシ_ol.webp">
-        <img src="実績_webp/202306_repair_チラシ_ol.webp" alt="パーソナルジムの新規オープンチラシ" loading="lazy">
+        <div class="thumb"><img src="実績_webp/202306_repair_チラシ_ol.webp" alt="パーソナルジムの新規オープンチラシ" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>パーソナルジム 新規オープン チラシ</b><span>A4／片面フルカラー</span></div>
       </a>
 
+      <a class="work" data-cat="book" href="実績_webp/Jスクールテキスト.webp">
+        <div class="thumb"><img src="実績_webp/Jスクールテキスト.webp" alt="スクール教材のテキスト" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>スクール教材 テキスト</b><span>A4／本文レイアウト・図解</span></div>
+      </a>
+
       <a class="work" data-cat="pamphlet" href="実績_webp/Jインソール_表面.webp">
-        <img src="実績_webp/Jインソール_表面.webp" alt="商品パンフレット 表面" loading="lazy">
+        <div class="thumb"><img src="実績_webp/Jインソール_表面.webp" alt="商品パンフレット 表面" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>商品パンフレット（表面）</b><span>A4三つ折り</span></div>
       </a>
 
       <a class="work" data-cat="pamphlet" href="実績_webp/Jインソール_中面_新.webp">
-        <img src="実績_webp/Jインソール_中面_新.webp" alt="商品パンフレット 中面" loading="lazy">
+        <div class="thumb"><img src="実績_webp/Jインソール_中面_新.webp" alt="商品パンフレット 中面" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>商品パンフレット（中面）</b><span>A4三つ折り</span></div>
       </a>
 
       <a class="work" data-cat="pamphlet" href="実績_webp/あしなか_中面02.webp">
-        <img src="実績_webp/あしなか_中面02.webp" alt="健康雑貨のパンフレット 中面" loading="lazy">
+        <div class="thumb"><img src="実績_webp/あしなか_中面02.webp" alt="健康雑貨のパンフレット 中面" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>健康雑貨 パンフレット（中面）</b><span>A4三つ折り</span></div>
       </a>
 
       <a class="work" data-cat="label" href="実績_webp/ラベル_食用ひまわり.webp">
-        <img src="実績_webp/ラベル_食用ひまわり.webp" alt="食用ひまわりの商品ラベル" loading="lazy">
+        <div class="thumb"><img src="実績_webp/ラベル_食用ひまわり.webp" alt="食用ひまわりの商品ラベル" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>食用ひまわり ラベル</b><span>商品ラベル</span></div>
       </a>
 
       <a class="work" data-cat="label" href="実績_webp/ラベル_メダカの卵.webp">
-        <img src="実績_webp/ラベル_メダカの卵.webp" alt="メダカの卵の商品ラベル" loading="lazy">
+        <div class="thumb"><img src="実績_webp/ラベル_メダカの卵.webp" alt="メダカの卵の商品ラベル" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>メダカの卵 ラベル</b><span>商品ラベル</span></div>
       </a>
 
       <a class="work" data-cat="label" href="実績_webp/ラベル_メダカの産卵床.webp">
-        <img src="実績_webp/ラベル_メダカの産卵床.webp" alt="メダカの産卵床の商品ラベル" loading="lazy">
+        <div class="thumb"><img src="実績_webp/ラベル_メダカの産卵床.webp" alt="メダカの産卵床の商品ラベル" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>メダカの産卵床 ラベル</b><span>商品ラベル</span></div>
       </a>
 
       <a class="work" data-cat="menu" href="実績_webp/メニューA_0418.webp">
-        <img src="実績_webp/メニューA_0418.webp" alt="サロンのメニュー表" loading="lazy">
+        <div class="thumb"><img src="実績_webp/メニューA_0418.webp" alt="サロンのメニュー表" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>メニュー表</b><span>A4／片面フルカラー</span></div>
       </a>
 
       <a class="work" data-cat="menu" href="実績_webp/POP_多肉植物.webp">
-        <img src="実績_webp/POP_多肉植物.webp" alt="多肉植物の店頭POP" loading="lazy">
+        <div class="thumb"><img src="実績_webp/POP_多肉植物.webp" alt="多肉植物の店頭POP" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>多肉植物 店頭POP</b><span>POP</span></div>
       </a>
 
       <a class="work" data-cat="card" href="実績_webp/KNOT.様_logo.webp">
-        <img src="実績_webp/KNOT.様_logo.webp" alt="サロンのロゴデザイン" loading="lazy">
+        <div class="thumb"><img src="実績_webp/KNOT.様_logo.webp" alt="サロンのロゴデザイン" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>サロン ロゴデザイン</b><span>ロゴ</span></div>
       </a>
 
       <a class="work" data-cat="card" href="実績_webp/KNOT.様_ショップカード03.webp">
-        <img src="実績_webp/KNOT.様_ショップカード03.webp" alt="サロンのショップカード" loading="lazy">
+        <div class="thumb"><img src="実績_webp/KNOT.様_ショップカード03.webp" alt="サロンのショップカード" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>ショップカード</b><span>ショップカード</span></div>
       </a>
 
       <a class="work" data-cat="card" href="実績_webp/Terrace j_プレゼントカード.webp">
-        <img src="実績_webp/Terrace j_プレゼントカード.webp" alt="プレゼントカード" loading="lazy">
+        <div class="thumb"><img src="実績_webp/Terrace j_プレゼントカード.webp" alt="プレゼントカード" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>プレゼントカード</b><span>カード</span></div>
       </a>
 
       <a class="work" data-cat="card" href="実績_webp/依頼01_納品.webp">
-        <img src="実績_webp/依頼01_納品.webp" alt="SNS用アイコンイラスト" loading="lazy">
+        <div class="thumb"><img src="実績_webp/依頼01_納品.webp" alt="SNS用アイコンイラスト" loading="lazy"></div><span class="zoom">⤢</span>
         <div class="cap"><b>アイコンイラスト</b><span>SNS・名刺用</span></div>
       </a>
 
+      <a class="work" data-cat="sign" href="実績_webp/ポスター_Marrange.webp">
+        <div class="thumb"><img src="実績_webp/ポスター_Marrange.webp" alt="化粧品ブランドの商品ポスター" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>商品ポスター</b><span>A2・A3／店頭掲示用</span></div>
+      </a>
+
+      <a class="work" data-cat="sign" href="実績_webp/看板_Jスタイル.webp">
+        <div class="thumb"><img src="実績_webp/看板_Jスタイル.webp" alt="フィットネスジムの看板" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>フィットネスジム 看板</b><span>屋外・縦型</span></div>
+      </a>
+
+      <a class="work" data-cat="sign" href="実績_webp/のぼり旗.webp">
+        <div class="thumb"><img src="実績_webp/のぼり旗.webp" alt="ダイエット訴求ののぼり旗" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>のぼり旗</b><span>600×1800mm／店頭</span></div>
+      </a>
+
+      <a class="work" data-cat="sign" href="実績_webp/バナー_Marrange.webp">
+        <div class="thumb"><img src="実績_webp/バナー_Marrange.webp" alt="オンラインサロンのWebバナー" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>Webバナー</b><span>851×315px／SNS・サイト用</span></div>
+      </a>
+
+      <a class="work" data-cat="pamphlet" href="実績_webp/パンフ_Jスクール.webp">
+        <div class="thumb"><img src="実績_webp/パンフ_Jスクール.webp" alt="スクール案内パンフレットの表紙" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>スクール案内 パンフレット</b><span>A4中綴じ／表紙・裏表紙</span></div>
+      </a>
+
+      <a class="work" data-cat="pamphlet" href="実績_webp/パンフ_Marrange.webp">
+        <div class="thumb"><img src="実績_webp/パンフ_Marrange.webp" alt="化粧品ブランドの三つ折りパンフレット" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>商品パンフレット（三つ折り）</b><span>A4巻三つ折り／表面</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/名刺_酒井.webp">
+        <div class="thumb"><img src="実績_webp/名刺_酒井.webp" alt="会社代表の名刺" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>名刺（代表取締役）</b><span>91×55mm／片面</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/名刺_水本.webp">
+        <div class="thumb"><img src="実績_webp/名刺_水本.webp" alt="トレーナーの名刺" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>名刺（トレーナー）</b><span>91×55mm／片面</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/名刺_卒業生用.webp">
+        <div class="thumb"><img src="実績_webp/名刺_卒業生用.webp" alt="スクール認定トレーナー用の名刺" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>名刺（認定トレーナー用）</b><span>91×55mm／片面</span></div>
+      </a>
+
+      <a class="work" data-cat="card" href="実績_webp/名刺_パパイヤ西田.webp">
+        <div class="thumb"><img src="実績_webp/名刺_パパイヤ西田.webp" alt="管理栄養士の名刺" loading="lazy"></div><span class="zoom">⤢</span>
+        <div class="cap"><b>名刺（管理栄養士）</b><span>91×55mm／片面</span></div>
+      </a>
+
     </div>
-    <p class="works-note">※ 掲載しているデザインの著作権は art@coco に帰属します。実物の一部は、個人情報にあたる部分を伏せています。</p>
+    <p class="works-note">※ 掲載しているデザインの著作権は art@coco に帰属します。名刺などに含まれる住所・電話番号・メールアドレスは伏せています。</p>
   </div>
 </section>
 
@@ -534,7 +607,7 @@ footer .forest img{width:100%;height:clamp(52px,9vw,96px);object-fit:cover;objec
   </div>
 </footer>
 
-<div id="lb"><button type="button" aria-label="閉じる">&times;</button><img src="" alt=""></div>
+<div id="lb"><button type="button" aria-label="閉じる">&times;</button><figure><img src="" alt=""><figcaption></figcaption></figure></div>
 
 <script>
 (function(){
@@ -561,6 +634,8 @@ footer .forest img{width:100%;height:clamp(52px,9vw,96px);object-fit:cover;objec
     e.preventDefault();
     lbImg.src = a.getAttribute('href');
     lbImg.alt = a.querySelector('.cap b').textContent;
+    lb.querySelector('figcaption').textContent =
+      a.querySelector('.cap b').textContent + '　' + a.querySelector('.cap span').textContent;
     lb.classList.add('on');
   });
   lb.addEventListener('click', close);
