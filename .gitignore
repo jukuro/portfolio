@@ -55,3 +55,8 @@ flyer-C.html
 art@coco_チラシ_両面.pdf
 art@coco_チラシ_両面_印刷用.pdf
 ラベル候補_比較.png
+
+# ── 入稿用（公開サイトには出さない。素材が高解像度で重いため）
+flyer-print.html
+assets/print/
+入稿用_art@coco_チラシ_A4両面_塗り足し3mm.pdf
